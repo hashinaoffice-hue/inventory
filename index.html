@@ -92,9 +92,7 @@
             overflow-y: auto;
         }
 
-        .sidebar.open {
-            left: 0;
-        }
+        .sidebar.open { left: 0; }
 
         .sidebar-overlay {
             display: none;
@@ -104,9 +102,7 @@
             z-index: 80;
         }
 
-        .sidebar-overlay.open {
-            display: block;
-        }
+        .sidebar-overlay.open { display: block; }
 
         .sidebar-section {
             padding: 16px 20px 12px;
@@ -119,9 +115,7 @@
             margin-top: -1px;
         }
 
-        .item-list {
-            list-style: none;
-        }
+        .item-list { list-style: none; }
 
         .sidebar-item {
             padding: 14px 20px;
@@ -135,9 +129,7 @@
             gap: 8px;
         }
 
-        .sidebar-item:hover {
-            background-color: var(--color-light-gray);
-        }
+        .sidebar-item:hover { background-color: var(--color-light-gray); }
 
         .sidebar-item.active {
             background-color: var(--color-black);
@@ -683,6 +675,7 @@
             padding: 20px;
             color: var(--color-text-muted);
             display: none;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -781,7 +774,7 @@
                             <div class="input-group">
                                 <label for="costInput">1개당 원가</label>
                                 <input type="number" id="costInput" placeholder="직접 입력 또는 자동" required>
-                                <div id="learnedPriceHelper" class="helper-text">💡 이전 발주 단가 적용됨</div>
+                                <div id="learnedPriceHelper" class="helper-text">💡 가장 최근 발주 단가 적용됨</div>
                             </div>
                             <div class="input-group">
                                 <label for="deliveryPriceInput">총 납품 청구액 (원가2배)</label>
@@ -796,7 +789,7 @@
                             <input type="number" id="totalOrderAmount" placeholder="예: 150000">
                         </div>
                         <div class="input-group">
-                            <label>학습될 1개당 평균 단가</label>
+                            <label>계산된 1개당 평균 단가</label>
                             <input type="text" id="calcUnitPrice" readonly placeholder="총 금액 ÷ 총 수량 (자동 계산)">
                         </div>
                     </div>
@@ -838,21 +831,21 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // ★★★ 여기에 본인의 Firebase 설정값을 복사해서 넣어주세요! ★★★
-        const firebaseConfig = {
-            apiKey: "본인의_API_KEY",
-            authDomain: "본인의_PROJECT_ID.firebaseapp.com",
-            projectId: "본인의_PROJECT_ID",
-            storageBucket: "본인의_PROJECT_ID.appspot.com",
-            messagingSenderId: "본인의_MESSAGING_SENDER_ID",
-            appId: "본인의_APP_ID"
-        };
+        // ★★★ 여기에 본인의 Firebase 설정값을 다시 꼭 붙여넣어 주세요! ★★★
+const firebaseConfig = {
+  apiKey: "AIzaSyANj0f_hc1zGXTnTM4TZt-kQTS-dY0jFPY",
+  authDomain: "katsu-hesed-minutes.firebaseapp.com",
+  projectId: "katsu-hesed-minutes",
+  storageBucket: "katsu-hesed-minutes.firebasestorage.app",
+  messagingSenderId: "421404505285",
+  appId: "1:421404505285:web:b209faa4b97e15a7162cac"
+};
         // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 전역 상태 (실시간 연동을 위해 데이터를 담을 배열)
+        // ★ 핵심: 이제 모든 기기에서 공유되는 실시간 데이터를 담을 그릇입니다.
         let allRecords = []; 
 
         const inventoryData = {
@@ -911,7 +904,7 @@
 
         dateInput.valueAsDate = new Date();
 
-        // 실시간 파이어베이스 데이터 불러오기
+        // ---------------- [실시간 파이어베이스 데이터 불러오기] ---------------- //
         loadingText.style.display = 'block';
         const q = query(collection(db, "katsu_inventory"), orderBy("timestamp", "desc"));
         
@@ -925,10 +918,13 @@
 
             updateMonthSidebar();
             
-            // 현재 보고 있는 화면을 실시간으로 갱신
+            // 데이터가 바뀔 때 현재 보고 있는 화면(탭) 새로고침
             if (currentFilter.type === 'inventory') renderInventoryTable();
             else if (currentFilter.type === 'profit') renderProfitTable();
             else renderRecords();
+            
+            // 데이터가 업데이트 되었으므로 단가 자동 입력 창도 갱신
+            checkLearnedPrice();
         });
 
         // ---------------- [사이드바 및 뷰 전환] ---------------- //
@@ -1000,7 +996,7 @@
             });
         }
 
-        // ---------------- [손익 계산 표 렌더링] ---------------- //
+        // ---------------- [손익 계산 표 렌더링 (allRecords 사용)] ---------------- //
         function renderProfitTable() {
             let totalOrder = 0;
             let totalDelivery = 0;
@@ -1103,7 +1099,7 @@
             profitContent.innerHTML = html;
         }
 
-        // ---------------- [현재고 표 계산 및 렌더링] ---------------- //
+        // ---------------- [현재고 표 계산 및 렌더링 (allRecords 사용)] ---------------- //
         function getInventoryData() {
             const stock = {};
             for (let cat in inventoryData) {
@@ -1147,8 +1143,8 @@
             inventoryContent.innerHTML = html;
         }
 
-        // ---------------- [폼 관련 기능] ---------------- //
-        // 지점명 등 설정은 기기 종속이 편하므로 LocalStorage 유지
+        // ---------------- [폼 및 계산 기능] ---------------- //
+        // (참고: 발주처/납품처 목록은 보안 및 데이터 절약을 위해 각 기기별 로컬저장소를 사용합니다)
         function getPartners() {
             const key = currentType === 'delivery' ? 'hesedBranches' : 'hesedSuppliers';
             const defaults = currentType === 'delivery' ? defaultBranches : defaultSuppliers;
@@ -1230,19 +1226,22 @@
                 orderFields.style.display = 'block';
                 costInput.required = false;
                 totalOrderAmount.required = true;
-                submitBtn.innerText = '발주 기록 저장 및 단가 학습';
+                submitBtn.innerText = '발주 기록 저장하기';
                 learnedPriceHelper.style.display = 'none';
             }
             calculateTotal();
         }
 
+        // ★ 파이어베이스 데이터를 읽어서 단가를 똑똑하게 학습하는 로직
         function checkLearnedPrice() {
             if (currentType !== 'delivery') return;
             const item = itemSelect.value;
-            const prices = JSON.parse(localStorage.getItem('hesedItemPrices')) || {};
             
-            if (prices[item]) {
-                costInput.value = prices[item];
+            // 파이어베이스에서 불러온 전체 기록 중, 해당 품목의 가장 최신 '발주' 기록을 찾음
+            const latestOrder = allRecords.find(r => r.type === 'order' && r.item === item);
+            
+            if (latestOrder && latestOrder.unitPrice) {
+                costInput.value = latestOrder.unitPrice;
                 learnedPriceHelper.style.display = 'block';
             } else {
                 costInput.value = '';
@@ -1318,7 +1317,7 @@
         });
 
 
-        // ---------------- [데이터 저장 및 삭제 (Firebase 연동)] ---------------- //
+        // ---------------- [데이터 파이어베이스에 저장 및 삭제] ---------------- //
         document.getElementById('recordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1351,15 +1350,10 @@
                 record.totalAmount = totalOrderAmount.value;
                 const unitPrice = Math.round(record.totalAmount / currentTotalQty);
                 record.unitPrice = unitPrice;
-                
-                // 단가 학습 저장 (로컬 유지)
-                const prices = JSON.parse(localStorage.getItem('hesedItemPrices')) || {};
-                prices[record.item] = unitPrice;
-                localStorage.setItem('hesedItemPrices', JSON.stringify(prices));
             }
 
             try {
-                // Firebase 저장
+                // 파이어베이스에 데이터 쓰기
                 await addDoc(collection(db, "katsu_inventory"), record);
                 
                 document.querySelectorAll('.size-input').forEach(input => input.value = '');
@@ -1369,16 +1363,15 @@
                 calcUnitPrice.value = '';
                 totalQtyDisplay.innerText = '0';
                 currentTotalQty = 0;
-                checkLearnedPrice();
-                alert("기록이 안전하게 저장되었습니다.");
                 
+                alert("기록이 안전하게 서버에 저장되었습니다.");
             } catch (error) {
                 console.error("저장 오류: ", error);
-                alert("저장 중 오류가 발생했습니다.");
+                alert("저장 중 오류가 발생했습니다. 개발자 도구를 확인해주세요.");
             }
         });
 
-        // Firebase 데이터 삭제
+        // 파이어베이스 데이터 삭제
         window.deleteRecord = async function(id) {
             const pwd = prompt("해당 기록을 삭제하시려면 비밀번호를 입력하세요.");
             if (pwd === "9395") {
@@ -1395,7 +1388,7 @@
         };
 
 
-        // ---------------- [리스트 및 요약 카드 렌더링] ---------------- //
+        // ---------------- [리스트 및 요약 카드 렌더링 (allRecords 사용)] ---------------- //
         function renderRecords() {
             let records = allRecords;
             monthlySummaryContainer.innerHTML = ''; 
@@ -1493,7 +1486,7 @@
             }).join('');
         }
 
-        // ---------------- [최초 UI 세팅] ---------------- //
+        // 최초 UI 세팅
         updateItemOptions();
         toggleMode();
 
