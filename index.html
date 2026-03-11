@@ -44,7 +44,7 @@
             overflow-x: hidden;
         }
 
-        /* 로그인 화면 (전체 덮기) */
+        /* 로그인 화면 */
         #loginScreen {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -88,9 +88,7 @@
             gap: 10px;
         }
 
-        .login-btn:active {
-            background-color: #eeeeee;
-        }
+        .login-btn:active { background-color: #eeeeee; }
 
         /* 헤더 */
         header {
@@ -105,10 +103,7 @@
             justify-content: space-between;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
+        .header-left { display: flex; align-items: center; }
 
         .menu-btn {
             background: none;
@@ -204,7 +199,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            display: none; /* 비로그인시 숨김 */
+            display: none; 
         }
 
         /* 탭 메뉴 */
@@ -319,6 +314,9 @@
             background-size: 16px;
             padding-right: 30px;
         }
+
+        optgroup { font-weight: bold; font-style: normal; }
+        optgroup option { font-weight: normal; }
 
         input:focus, select:focus {
             outline: none;
@@ -499,10 +497,7 @@
             transition: all 0.2s;
         }
 
-        .btn-delete-record:hover {
-            background: #ff4757;
-            color: white;
-        }
+        .btn-delete-record:hover { background: #ff4757; color: white; }
 
         .record-details {
             font-size: 0.9rem;
@@ -721,13 +716,20 @@
             cursor: pointer;
         }
 
-        .add-partner-form { display: flex; gap: 10px; }
+        .add-partner-form { display: flex; gap: 8px; align-items: center;}
+        
+        #newBranchType {
+            padding: 10px;
+            width: auto;
+            min-width: 90px;
+        }
 
         .btn-add-partner {
             background: var(--color-black);
             color: white;
             border: none;
             padding: 0 16px;
+            height: 100%;
             border-radius: 6px;
             font-weight: 700;
             cursor: pointer;
@@ -854,7 +856,7 @@
                                 <div id="learnedPriceHelper" class="helper-text">💡 가장 최근 발주 단가 적용됨</div>
                             </div>
                             <div class="input-group">
-                                <label for="deliveryPriceInput">총 납품 청구액 (원가2배)</label>
+                                <label id="deliveryPriceLabel" for="deliveryPriceInput">총 납품 청구액</label>
                                 <input type="text" id="deliveryPriceInput" readonly placeholder="자동 계산">
                             </div>
                         </div>
@@ -888,7 +890,11 @@
             </div>
             <div class="partner-list" id="partnerList"></div>
             <form class="add-partner-form" id="addPartnerForm">
-                <input type="text" id="newPartnerInput" placeholder="새로운 이름 입력" required>
+                <select id="newBranchType" style="display:none;">
+                    <option value="direct">직영점</option>
+                    <option value="franchise">가맹점</option>
+                </select>
+                <input type="text" id="newPartnerInput" placeholder="새로운 이름 입력" required style="flex:1;">
                 <button type="submit" class="btn-add-partner">추가</button>
             </form>
         </div>
@@ -941,7 +947,11 @@ const firebaseConfig = {
             }
         };
 
-        const defaultBranches = ['옥정점', '민락점', '송리단길점', '어린이대공원점', '혜화 대학로점', '동두천점', '덕정점', '당산점', '광주 상무지구점'];
+        // ★ 변경된 직영/가맹 데이터 구조
+        const defaultBranchesV2 = {
+            direct: ['옥정점', '민락점', '송리단길점', '어린이대공원점', '혜화 대학로점'],
+            franchise: ['동두천점', '덕정점', '광주 상무지구점', '당산점']
+        };
         const defaultSuppliers = ['본사 물류', '유니폼 제작업체 A', '포장재 업체 B'];
 
         let currentCat = 'uniform';
@@ -964,6 +974,7 @@ const firebaseConfig = {
         const deliveryFields = document.getElementById('deliveryFields');
         const costInput = document.getElementById('costInput');
         const deliveryPriceInput = document.getElementById('deliveryPriceInput');
+        const deliveryPriceLabel = document.getElementById('deliveryPriceLabel');
         const learnedPriceHelper = document.getElementById('learnedPriceHelper');
         const orderFields = document.getElementById('orderFields');
         const totalOrderAmount = document.getElementById('totalOrderAmount');
@@ -985,6 +996,7 @@ const firebaseConfig = {
         const modalTitle = document.getElementById('modalTitle');
         const partnerListDiv = document.getElementById('partnerList');
         const newPartnerInput = document.getElementById('newPartnerInput');
+        const newBranchType = document.getElementById('newBranchType');
         const loadingText = document.getElementById('loadingText');
 
         dateInput.valueAsDate = new Date();
@@ -998,21 +1010,17 @@ const firebaseConfig = {
 
         logoutBtn.addEventListener('click', () => {
             signOut(auth).then(() => {
-                if(unsubscribeSnapshot) {
-                    unsubscribeSnapshot(); 
-                }
+                if(unsubscribeSnapshot) unsubscribeSnapshot(); 
             });
         });
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // 로그인 성공
                 loginScreen.style.display = 'none';
                 mainContainer.style.display = 'block';
                 logoutBtn.style.display = 'block';
-                startFetchingData(); // 로그인 성공 시에만 데이터 불러오기 시작
+                startFetchingData(); 
             } else {
-                // 로그아웃 상태
                 loginScreen.style.display = 'flex';
                 mainContainer.style.display = 'none';
                 logoutBtn.style.display = 'none';
@@ -1041,7 +1049,7 @@ const firebaseConfig = {
                 checkLearnedPrice();
             }, (error) => {
                 console.error("데이터 연동 에러:", error);
-                loadingText.innerText = "데이터를 불러올 권한이 없습니다. 관리자에게 문의하세요.";
+                loadingText.innerText = "데이터를 불러올 권한이 없습니다.";
             });
         }
 
@@ -1114,7 +1122,7 @@ const firebaseConfig = {
             });
         }
 
-        // ---------------- [손익 계산 표 렌더링] ---------------- //
+        // ---------------- [손익 계산 표] ---------------- //
         function renderProfitTable() {
             let totalOrder = 0;
             let totalDelivery = 0;
@@ -1217,7 +1225,7 @@ const firebaseConfig = {
             profitContent.innerHTML = html;
         }
 
-        // ---------------- [현재고 표 계산 및 렌더링] ---------------- //
+        // ---------------- [현재고 표] ---------------- //
         function getInventoryData() {
             const stock = {};
             for (let cat in inventoryData) {
@@ -1261,23 +1269,45 @@ const firebaseConfig = {
             inventoryContent.innerHTML = html;
         }
 
-        // ---------------- [폼 및 계산 기능] ---------------- //
+        // ---------------- [폼 및 계산 (직영/가맹 구분)] ---------------- //
         function getPartners() {
-            const key = currentType === 'delivery' ? 'hesedBranches' : 'hesedSuppliers';
-            const defaults = currentType === 'delivery' ? defaultBranches : defaultSuppliers;
-            let stored = JSON.parse(localStorage.getItem(key));
-            if (!stored || stored.length === 0) {
-                stored = defaults;
-                localStorage.setItem(key, JSON.stringify(stored));
+            if (currentType === 'delivery') {
+                let stored = JSON.parse(localStorage.getItem('hesedBranchesV2'));
+                if (!stored) {
+                    stored = defaultBranchesV2;
+                    localStorage.setItem('hesedBranchesV2', JSON.stringify(stored));
+                }
+                return stored;
+            } else {
+                let stored = JSON.parse(localStorage.getItem('hesedSuppliers'));
+                if (!stored || stored.length === 0) {
+                    stored = defaultSuppliers;
+                    localStorage.setItem('hesedSuppliers', JSON.stringify(stored));
+                }
+                return stored;
             }
-            return stored;
         }
 
         function renderPartnerSelect() {
             const partners = getPartners();
-            partnerSelect.innerHTML = partners.map(p => `<option value="${p}">${p}</option>`).join('');
-            partnerLabel.innerText = currentType === 'delivery' ? '납품처 (지점명)' : '발주처 (업체명)';
+            if (currentType === 'delivery') {
+                partnerSelect.innerHTML = `
+                    <optgroup label="🏢 직영점 (원가 납품)">
+                        ${partners.direct.map(p => `<option value="${p}" data-type="direct">${p}</option>`).join('')}
+                    </optgroup>
+                    <optgroup label="🤝 가맹점 (2배수 마진)">
+                        ${partners.franchise.map(p => `<option value="${p}" data-type="franchise">${p}</option>`).join('')}
+                    </optgroup>
+                `;
+                partnerLabel.innerText = '납품처 (지점명)';
+            } else {
+                partnerSelect.innerHTML = partners.map(p => `<option value="${p}">${p}</option>`).join('');
+                partnerLabel.innerText = '발주처 (업체명)';
+            }
+            calculateTotal(); // 거래처가 바뀔 때 계산 갱신
         }
+
+        partnerSelect.addEventListener('change', calculateTotal);
 
         function updateItemOptions() {
             const items = Object.keys(inventoryData[currentCat]);
@@ -1312,14 +1342,20 @@ const firebaseConfig = {
             totalQtyDisplay.innerText = currentTotalQty;
 
             const cost = parseInt(costInput.value) || 0;
-            if(currentTotalQty > 0 && cost > 0) {
-                deliveryPriceInput.value = (cost * 2 * currentTotalQty).toLocaleString() + ' 원';
+            if (currentType === 'delivery' && currentTotalQty > 0 && cost > 0) {
+                const selectedOption = partnerSelect.options[partnerSelect.selectedIndex];
+                const isDirect = selectedOption ? selectedOption.dataset.type === 'direct' : false;
+                const multiplier = isDirect ? 1 : 2; // 직영 1배수, 가맹 2배수
+                
+                deliveryPriceLabel.innerText = isDirect ? '총 납품 청구액 (직영 - 원가)' : '총 납품 청구액 (가맹 - 2배수)';
+                deliveryPriceInput.value = (cost * multiplier * currentTotalQty).toLocaleString() + ' 원';
             } else {
                 deliveryPriceInput.value = '';
+                deliveryPriceLabel.innerText = '총 납품 청구액';
             }
 
             const totalAmt = parseInt(totalOrderAmount.value) || 0;
-            if(currentType === 'order' && currentTotalQty > 0 && totalAmt > 0) {
+            if (currentType === 'order' && currentTotalQty > 0 && totalAmt > 0) {
                 calcUnitPrice.value = Math.round(totalAmt / currentTotalQty).toLocaleString() + ' 원';
             } else {
                 calcUnitPrice.value = '';
@@ -1385,9 +1421,10 @@ const firebaseConfig = {
 
         itemSelect.addEventListener('change', renderSizeGrid);
 
-        // ---------------- [거래처 관리 모달] ---------------- //
+        // ---------------- [거래처 관리 모달 (직영/가맹 지원)] ---------------- //
         document.getElementById('btnManagePartner').addEventListener('click', () => {
             modalTitle.innerText = currentType === 'delivery' ? '납품처(지점) 관리' : '발주처 관리';
+            newBranchType.style.display = currentType === 'delivery' ? 'block' : 'none';
             renderModalList();
             partnerModal.style.display = 'flex';
         });
@@ -1399,19 +1436,35 @@ const firebaseConfig = {
 
         function renderModalList() {
             const partners = getPartners();
-            partnerListDiv.innerHTML = partners.map((p, index) => `
-                <div class="partner-item">
-                    <span>${p}</span>
-                    <button type="button" class="btn-delete-partner" onclick="deletePartner(${index})">삭제</button>
-                </div>
-            `).join('');
+            if (currentType === 'delivery') {
+                let html = '<div style="font-weight:800; font-size:0.9rem; margin-bottom:5px;">🏢 직영점</div>';
+                partners.direct.forEach((p, idx) => {
+                    html += `<div class="partner-item"><span>${p}</span><button type="button" class="btn-delete-partner" onclick="deletePartner('direct', ${idx})">삭제</button></div>`;
+                });
+                html += '<div style="font-weight:800; font-size:0.9rem; margin:15px 0 5px;">🤝 가맹점</div>';
+                partners.franchise.forEach((p, idx) => {
+                    html += `<div class="partner-item"><span>${p}</span><button type="button" class="btn-delete-partner" onclick="deletePartner('franchise', ${idx})">삭제</button></div>`;
+                });
+                partnerListDiv.innerHTML = html;
+            } else {
+                partnerListDiv.innerHTML = partners.map((p, index) => `
+                    <div class="partner-item">
+                        <span>${p}</span>
+                        <button type="button" class="btn-delete-partner" onclick="deletePartner('supplier', ${index})">삭제</button>
+                    </div>
+                `).join('');
+            }
         }
 
-        window.deletePartner = function(index) {
-            const key = currentType === 'delivery' ? 'hesedBranches' : 'hesedSuppliers';
+        window.deletePartner = function(type, index) {
             let partners = getPartners();
-            partners.splice(index, 1);
-            localStorage.setItem(key, JSON.stringify(partners));
+            if (currentType === 'delivery') {
+                partners[type].splice(index, 1);
+                localStorage.setItem('hesedBranchesV2', JSON.stringify(partners));
+            } else {
+                partners.splice(index, 1);
+                localStorage.setItem('hesedSuppliers', JSON.stringify(partners));
+            }
             renderModalList();
         };
 
@@ -1419,20 +1472,29 @@ const firebaseConfig = {
             e.preventDefault();
             const newName = newPartnerInput.value.trim();
             if(!newName) return;
-            const key = currentType === 'delivery' ? 'hesedBranches' : 'hesedSuppliers';
+            
             let partners = getPartners();
-            if(!partners.includes(newName)) {
-                partners.push(newName);
-                localStorage.setItem(key, JSON.stringify(partners));
-                newPartnerInput.value = '';
-                renderModalList();
+            if (currentType === 'delivery') {
+                const bType = newBranchType.value;
+                if(partners.direct.includes(newName) || partners.franchise.includes(newName)) {
+                    alert('이미 존재하는 이름입니다.'); return;
+                }
+                partners[bType].push(newName);
+                localStorage.setItem('hesedBranchesV2', JSON.stringify(partners));
             } else {
-                alert('이미 존재하는 이름입니다.');
+                if(partners.includes(newName)) {
+                    alert('이미 존재하는 이름입니다.'); return;
+                }
+                partners.push(newName);
+                localStorage.setItem('hesedSuppliers', JSON.stringify(partners));
             }
+            
+            newPartnerInput.value = '';
+            renderModalList();
         });
 
 
-        // ---------------- [데이터 파이어베이스에 저장 및 삭제] ---------------- //
+        // ---------------- [데이터 파이어베이스 저장 및 삭제] ---------------- //
         document.getElementById('recordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1455,13 +1517,18 @@ const firebaseConfig = {
                 sizes: sizesData,
                 totalQty: currentTotalQty,
                 date: dateInput.value,
-                author: auth.currentUser.email, // 작성자 이메일 추가
+                author: auth.currentUser.email,
                 timestamp: Date.now()
             };
 
             if (currentType === 'delivery') {
+                const selectedOption = partnerSelect.options[partnerSelect.selectedIndex];
+                const isDirect = selectedOption ? selectedOption.dataset.type === 'direct' : false;
+                const multiplier = isDirect ? 1 : 2;
+
                 record.cost = costInput.value;
-                record.totalDeliveryPrice = costInput.value * 2 * currentTotalQty;
+                record.multiplier = multiplier; // 리스트에 1배/2배를 구별하기 위해 저장
+                record.totalDeliveryPrice = costInput.value * multiplier * currentTotalQty;
             } else {
                 record.totalAmount = totalOrderAmount.value;
                 const unitPrice = Math.round(record.totalAmount / currentTotalQty);
@@ -1557,11 +1624,16 @@ const firebaseConfig = {
 
                 let priceHTML = '';
                 if (isDelivery) {
+                    const multiplier = data.multiplier || 2; // 과거 기록 호환성(기본 2배수)
+                    const isDirect = multiplier === 1;
+                    const priceLabel = isDirect ? '직영점 (마진 0%)' : '가맹점 (2배수)';
+                    const highlightColor = isDirect ? 'var(--color-black)' : '#b33939';
+
                     priceHTML = `
                         <div class="price-box">
                             <div class="price-col">
                                 <span>1개당 원가: ${Number(data.cost).toLocaleString()}원</span>
-                                <span style="font-weight: 700; color: #b33939;">1개당 납품가: ${Number(data.cost * 2).toLocaleString()}원</span>
+                                <span style="font-weight: 700; color: ${highlightColor};">1개당 납품가: ${Number(data.cost * multiplier).toLocaleString()}원 <br><span style="font-size:0.75rem; color:#888;">[${priceLabel}]</span></span>
                             </div>
                             <strong>총 납품액: <br>${Number(data.totalDeliveryPrice).toLocaleString()}원</strong>
                         </div>
