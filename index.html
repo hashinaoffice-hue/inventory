@@ -25,9 +25,9 @@
             --color-black: #191F28;
             --color-white: #FFFFFF;
             --color-light-gray: #F9FAFB;
-            --color-profit: #3182F6; 
-            --color-loss: #F04452;   
-            --sidebar-width: 260px;
+            --color-profit: #3182F6; /* 납품/수익 탭 (블루) */
+            --color-loss: #F04452;   /* 발주/비용 탭 (레드) */
+            --sidebar-width: 250px;
         }
 
         body.dark-mode {
@@ -52,153 +52,157 @@
         
         input, select { 
             background-color: var(--color-light-gray); color: var(--color-text); border: 1px solid transparent; 
-            font-size: 15px; padding: 12px 14px; border-radius: 10px; width: 100%; transition: all 0.2s; 
+            font-size: 15px; padding: 10px 12px; border-radius: 8px; width: 100%; transition: all 0.2s; 
         }
         input:focus, select:focus { outline: none; border-color: var(--color-black); background-color: var(--color-white); box-shadow: 0 0 0 3px rgba(25, 31, 40, 0.05); }
-        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B95A1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; padding-right: 32px; }
+        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B95A1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; padding-right: 30px; }
 
         #loginScreen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: #1A1C1E; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px; }
-        #loginScreen h1 { color: #fff; margin-bottom: 8px; font-size: 1.6rem; letter-spacing: 0; font-weight: 800; }
+        #loginScreen h1 { color: #fff; margin-bottom: 8px; font-size: 1.6rem; font-weight: 800; }
         #loginScreen p { color: #8B95A1; margin-bottom: 30px; font-size: 0.9rem; line-height: 1.5; }
         .login-btn { background-color: white; color: #191F28; border: none; padding: 14px 20px; font-size: 0.95rem; font-weight: 700; border-radius: 10px; display: flex; align-items: center; gap: 8px; }
         .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        header { background-color: var(--color-bg); padding: 12px 16px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(10px); background-color: rgba(242, 244, 246, 0.8); }
+        header { background-color: var(--color-bg); padding: 10px 16px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(10px); background-color: rgba(242, 244, 246, 0.8); }
         body.dark-mode header { background-color: rgba(18, 18, 18, 0.8); }
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .menu-btn { background: none; border: none; font-size: 1.5rem; color: var(--color-black); padding: 4px; }
-        header h1 { font-size: 1.1rem; font-weight: 800; color: var(--color-black); margin: 0; }
-        .logout-btn { background: none; border: none; color: var(--color-text-muted); font-size: 0.85rem; font-weight: 700; padding: 6px; }
+        .header-left { display: flex; align-items: center; gap: 8px; }
+        .menu-btn { background: none; border: none; font-size: 1.4rem; color: var(--color-black); padding: 4px; }
+        header h1 { font-size: 1.05rem; font-weight: 800; color: var(--color-black); margin: 0; }
+        .logout-btn { background: none; border: none; color: var(--color-text-muted); font-size: 0.8rem; font-weight: 700; padding: 6px; }
 
-        .sidebar { width: var(--sidebar-width); background-color: var(--color-white); height: 100vh; position: fixed; top: 0; left: calc(-1 * var(--sidebar-width)); padding-top: 50px; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 90; border-right: 1px solid var(--color-border); display: flex; flex-direction: column; box-shadow: 4px 0 20px rgba(0,0,0,0.05); }
+        .sidebar { width: var(--sidebar-width); background-color: var(--color-white); height: 100vh; position: fixed; top: 0; left: calc(-1 * var(--sidebar-width)); padding-top: 48px; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 90; border-right: 1px solid var(--color-border); display: flex; flex-direction: column; box-shadow: 4px 0 20px rgba(0,0,0,0.05); }
         .sidebar.open { left: 0; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 80; backdrop-filter: blur(2px); }
         .sidebar-overlay.open { display: block; }
         .sidebar-scroll { flex: 1; overflow-y: auto; padding-bottom: 20px; }
-        .sidebar-section { padding: 24px 20px 8px; font-weight: 700; font-size: 0.75rem; color: var(--color-text-muted); }
+        .sidebar-section { padding: 20px 16px 8px; font-weight: 700; font-size: 0.75rem; color: var(--color-text-muted); }
         .item-list { list-style: none; }
-        .sidebar-item { padding: 10px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; color: var(--color-text); border-radius: 0 16px 16px 0; margin-right: 16px; transition: background 0.1s; }
+        .sidebar-item { padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; color: var(--color-text); border-radius: 0 16px 16px 0; margin-right: 16px; transition: background 0.1s; }
         .sidebar-item:hover { background-color: var(--color-light-gray); }
         .sidebar-item.active { background-color: var(--color-black); color: var(--color-bg); font-weight: 700; }
         
-        .year-menu-header { padding: 12px 20px; font-weight: 700; font-size:0.9rem; cursor: pointer; display:flex; justify-content: space-between; color: var(--color-text); }
+        .year-menu-header { padding: 10px 16px; font-weight: 700; font-size:0.9rem; cursor: pointer; display:flex; justify-content: space-between; color: var(--color-text); }
         .year-menu-header:hover { background-color: var(--color-light-gray); }
         .month-list { display: none; background: var(--color-light-gray); margin-bottom: 8px; }
         .year-group.open .month-list { display: block; }
-        .month-item { padding: 10px 20px 10px 40px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--color-text-muted); }
+        .month-item { padding: 8px 16px 8px 36px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--color-text-muted); }
         .month-item:hover { color: var(--color-text); }
         .month-item.active { font-weight: 800; color: var(--color-profit); }
         .sidebar-bottom { padding: 16px; border-top: 1px solid var(--color-border); background: var(--color-white); }
-        .search-box { display: flex; gap: 6px; margin-bottom: 12px; }
-        .search-box input { flex: 1; font-size: 0.9rem; padding: 10px; background: var(--color-light-gray); }
-        .search-box button { background: var(--color-black); color: var(--color-bg); border: none; padding: 0 14px; border-radius: 10px; font-size: 1rem; }
-        .btn-settings { width: 100%; padding: 10px; background: var(--color-bg); border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem; color: var(--color-text); }
+        .search-box { display: flex; gap: 6px; margin-bottom: 10px; }
+        .search-box input { flex: 1; font-size: 0.85rem; padding: 10px; background: var(--color-light-gray); }
+        .search-box button { background: var(--color-black); color: var(--color-bg); border: none; padding: 0 12px; border-radius: 8px; font-size: 0.9rem; }
+        .btn-settings { width: 100%; padding: 10px; background: var(--color-bg); border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem; color: var(--color-text); }
 
-        .container { max-width: 600px; margin: 0 auto; padding: 12px 16px; display: none; }
-        .view-title { font-size: 1.2rem; font-weight: 800; padding-bottom: 8px; margin-bottom: 16px; display:flex; justify-content: space-between; align-items:flex-end; color: var(--color-text); }
+        .container { max-width: 600px; margin: 0 auto; padding: 12px 14px; display: none; }
+        .view-title { font-size: 1.15rem; font-weight: 800; padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content: space-between; align-items:flex-end; color: var(--color-text); }
 
-        .form-card { background: var(--color-white); padding: 20px 16px; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); border: 1px solid var(--color-border); }
+        .form-card { background: var(--color-white); padding: 16px; border-radius: 14px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); border: 1px solid var(--color-border); }
         
-        .category-tabs { display: flex; margin-bottom: 16px; background: var(--color-bg); border-radius: 12px; padding: 4px; }
-        .cat-tab { flex: 1; padding: 8px; text-align: center; font-size: 0.9rem; font-weight: 700; background: transparent; color: var(--color-text-muted); border: none; border-radius: 8px; }
+        .category-tabs { display: flex; margin-bottom: 12px; background: var(--color-bg); border-radius: 10px; padding: 4px; }
+        .cat-tab { flex: 1; padding: 8px; text-align: center; font-size: 0.85rem; font-weight: 700; background: transparent; color: var(--color-text-muted); border: none; border-radius: 8px; }
         .cat-tab.active { background: var(--color-white); color: var(--color-black); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-        .type-tabs { display: flex; margin-bottom: 20px; gap: 8px; }
-        .type-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.85rem; font-weight: 700; background: var(--color-white); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 10px; }
-        .type-tab.active { border-color: var(--color-black); color: var(--color-text); background: var(--color-bg); }
+        
+        /* ★ 납품 / 발주 탭 컬러 구분 */
+        .type-tabs { display: flex; margin-bottom: 16px; gap: 8px; }
+        .type-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.9rem; font-weight: 800; background: var(--color-white); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 10px; transition: all 0.2s;}
+        .type-tab[data-type="delivery"].active { border-color: var(--color-profit); color: var(--color-white); background: var(--color-profit); }
+        .type-tab[data-type="order"].active { border-color: var(--color-loss); color: var(--color-white); background: var(--color-loss); }
 
-        .input-group { margin-bottom: 14px; }
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+        .input-group { margin-bottom: 12px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
         .input-row .input-group { margin-bottom: 0; }
         
-        label { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; color: var(--color-text); }
-        .manage-link { font-size: 0.75rem; color: var(--color-profit); text-decoration: none; cursor: pointer; font-weight: 600; }
+        label { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; margin-bottom: 4px; color: var(--color-text); }
+        .manage-link { font-size: 0.7rem; color: var(--color-profit); text-decoration: none; cursor: pointer; font-weight: 600; }
         input[readonly] { background-color: var(--color-bg); color: var(--color-text-muted); font-weight: 600; border-color: transparent; }
         
-        .size-grid-container { background: var(--color-bg); padding: 14px; border-radius: 12px; margin-bottom: 20px; }
-        .size-grid-header { font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
-        .total-qty-badge { background: var(--color-black); color: var(--color-bg); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; }
+        .size-grid-container { background: var(--color-bg); padding: 12px; border-radius: 10px; margin-bottom: 16px; }
+        .size-grid-header { font-size: 0.75rem; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
+        .total-qty-badge { background: var(--color-black); color: var(--color-bg); padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; }
         
-        .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); gap: 8px; }
-        .size-item { display: flex; flex-direction: column; align-items: center; background: var(--color-white); border-radius: 8px; padding: 8px 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
-        .size-item span { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; color: var(--color-text-muted); }
-        .size-item input { padding: 6px; text-align: center; font-size: 1rem; font-weight: 700; width: 100%; border-radius: 6px; background: var(--color-light-gray); border: none; }
+        .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 6px; }
+        .size-item { display: flex; flex-direction: column; align-items: center; background: var(--color-white); border-radius: 8px; padding: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+        .size-item span { font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; color: var(--color-text-muted); }
+        .size-item input { padding: 6px; text-align: center; font-size: 0.9rem; font-weight: 700; width: 100%; border-radius: 6px; background: var(--color-light-gray); border: none; }
         .size-item input:focus { background: var(--color-white); border: 1px solid var(--color-black); }
 
-        .submit-btn { width: 100%; padding: 14px; background: var(--color-black); color: var(--color-bg); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 800; margin-top: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .submit-btn { width: 100%; padding: 14px; background: var(--color-black); color: var(--color-bg); border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 800; margin-top: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
         .helper-text { font-size: 0.7rem; color: var(--color-profit); margin-top: 4px; display: none; font-weight: 600; }
 
-        #searchSummaryArea { display: none; margin-bottom: 24px; }
-        .search-summary-box { background: var(--color-black); border-radius: 16px; padding: 16px; color: var(--color-white); }
-        .search-summary-box h4 { margin: 0 0 12px 0; font-size: 0.85rem; color: var(--color-text-muted); font-weight: 700; }
-        .search-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
-        .summary-item { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+        #searchSummaryArea { display: none; margin-bottom: 20px; }
+        .search-summary-box { background: var(--color-black); border-radius: 14px; padding: 14px; color: var(--color-white); }
+        .search-summary-box h4 { margin: 0 0 10px 0; font-size: 0.8rem; color: var(--color-text-muted); font-weight: 700; }
+        .search-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; }
+        .summary-item { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; gap: 2px; }
         .summary-item span { font-size: 0.7rem; color: rgba(255,255,255,0.7); font-weight: 600;}
-        .summary-item strong { font-size: 1rem; color: #fff; font-weight: 800;}
+        .summary-item strong { font-size: 0.95rem; color: #fff; font-weight: 800;}
 
-        .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 14px; padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); }
+        /* 컴팩트 리스트 카드 */
+        .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
         .rc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .rc-left, .rc-right { display: flex; align-items: center; gap: 6px; }
-        .rc-badge { font-size: 0.65rem; padding: 3px 6px; border-radius: 6px; font-weight: 800; line-height: 1; }
+        .rc-badge { font-size: 0.65rem; padding: 3px 6px; border-radius: 4px; font-weight: 800; line-height: 1; }
         .bg-delivery { background: var(--color-profit); color: #fff; }
-        .bg-order { background: var(--color-text-muted); color: #fff; }
+        .bg-order { background: var(--color-loss); color: #fff; }
         .bg-adjust { background: var(--color-black); color: var(--color-bg); }
         .rc-title { font-weight: 800; font-size: 0.95rem; color: var(--color-text); }
-        .rc-date { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500; }
-        .btn-delete-icon { background: none; border: none; color: var(--color-border); cursor: pointer; padding: 2px 4px; border-radius: 4px; font-size:0.8rem; font-weight:700;}
+        .rc-date { font-size: 0.7rem; color: var(--color-text-muted); font-weight: 500; }
+        .btn-delete-icon { background: none; border: none; color: var(--color-border); cursor: pointer; padding: 2px 4px; border-radius: 4px; font-size:0.75rem; font-weight:700;}
         .btn-delete-icon:hover { color: var(--color-loss); }
         
-        .rc-mid { display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.8rem; color: var(--color-text); background: var(--color-bg); padding: 10px; border-radius: 10px; margin-bottom: 10px; }
-        .rc-partner { font-weight: 800; display: block; margin-bottom: 4px; font-size: 0.85rem; }
+        .rc-mid { display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.75rem; color: var(--color-text); background: var(--color-bg); padding: 8px; border-radius: 8px; margin-bottom: 8px; }
+        .rc-partner { font-weight: 800; display: block; margin-bottom: 4px; font-size: 0.8rem; }
         .rc-sizes { color: var(--color-text-muted); line-height: 1.4; word-break: break-all; }
-        .rc-qty { font-weight: 800; background: var(--color-white); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--color-border); white-space: nowrap; }
+        .rc-qty { font-weight: 800; background: var(--color-white); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; border: 1px solid var(--color-border); white-space: nowrap; }
 
-        .rc-bot { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 4px; }
-        .rc-price-info { font-size: 0.75rem; color: var(--color-text-muted); }
+        .rc-bot { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 2px; }
+        .rc-price-info { font-size: 0.75rem; color: var(--color-text-muted); line-height: 1.3;}
         .rc-total-price { font-size: 1.05rem; font-weight: 800; color: var(--color-text); }
 
-        .table-responsive { width: 100%; overflow-x: auto; background: var(--color-white); border-radius: 14px; border: 1px solid var(--color-border); margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
-        .data-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 0.85rem; white-space: nowrap; color: var(--color-text); }
-        .data-table th, .data-table td { border-bottom: 1px solid var(--color-bg); padding: 12px 10px; }
-        .data-table th { background-color: var(--color-white); color: var(--color-text-muted); font-weight: 700; font-size: 0.75rem; border-bottom: 1px solid var(--color-border); }
+        .table-responsive { width: 100%; overflow-x: auto; background: var(--color-white); border-radius: 12px; border: 1px solid var(--color-border); margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+        .data-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 0.8rem; white-space: nowrap; color: var(--color-text); }
+        .data-table th, .data-table td { border-bottom: 1px solid var(--color-bg); padding: 10px 8px; }
+        .data-table th { background-color: var(--color-white); color: var(--color-text-muted); font-weight: 700; font-size: 0.7rem; border-bottom: 1px solid var(--color-border); }
         .data-table tbody tr:last-child td { border-bottom: none; }
         .row-header { font-weight: 800; color: var(--color-text); background-color: var(--color-bg); }
 
         .text-profit { color: var(--color-profit); font-weight: 800; }
         .text-loss { color: var(--color-loss); font-weight: 800; }
 
-        .profit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 16px; border-radius: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .profit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 14px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .profit-card.full { grid-column: 1 / -1; background: var(--color-black); border: none; }
-        .profit-card span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 6px; }
+        .profit-card span { display: block; font-size: 0.7rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 4px; }
         .profit-card.full span { color: rgba(255,255,255,0.7); }
-        .profit-card strong { font-size: 1.15rem; font-weight: 800; color: var(--color-text); }
-        .profit-card.full strong { color: #fff; font-size: 1.3rem; }
+        .profit-card strong { font-size: 1.1rem; font-weight: 800; color: var(--color-text); }
+        .profit-card.full strong { color: #fff; font-size: 1.2rem; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: flex-end; z-index: 1000; padding: 10px; }
         @media (min-width: 480px) { .modal-overlay { align-items: center; } } 
-        .modal-content { background: var(--color-white); width: 100%; max-width: 400px; border-radius: 20px 20px 12px 12px; padding: 24px; max-height: 85vh; overflow-y:auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
+        .modal-content { background: var(--color-white); width: 100%; max-width: 400px; border-radius: 20px 20px 12px 12px; padding: 20px; max-height: 85vh; overflow-y:auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
         @media (min-width: 480px) { .modal-content { border-radius: 16px; } }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-weight: 800; font-size: 1.1rem; color: var(--color-black); }
-        .modal-close { background: var(--color-bg); border: none; font-size: 1.2rem; color: var(--color-text-muted); width: 32px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 800; font-size: 1.05rem; color: var(--color-black); }
+        .modal-close { background: var(--color-bg); border: none; font-size: 1rem; color: var(--color-text-muted); width: 28px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
         
-        .settings-section { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border); }
-        .settings-title { font-weight: 800; margin-bottom: 10px; color: var(--color-black); font-size: 0.95rem; }
-        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
-        .setting-input { width: 100px; padding: 8px 10px; text-align: right; background: var(--color-bg); }
-        .btn-action { background: var(--color-bg); border: none; color: var(--color-text); padding: 14px; border-radius: 12px; width: 100%; font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
+        .settings-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border); }
+        .settings-title { font-weight: 800; margin-bottom: 8px; color: var(--color-black); font-size: 0.9rem; }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+        .setting-input { width: 90px; padding: 8px; text-align: right; background: var(--color-bg); }
+        .btn-action { background: var(--color-bg); border: none; color: var(--color-text); padding: 12px; border-radius: 10px; width: 100%; font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
         .btn-action.primary { background: var(--color-black); color: var(--color-white); }
         
-        .empty-state { text-align: center; padding: 60px 20px; color: var(--color-text-muted); font-size: 0.9rem; font-weight: 600; background: var(--color-white); border-radius: 16px; border: 1px dashed var(--color-border); }
-        input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--color-black); cursor: pointer; }
+        .empty-state { text-align: center; padding: 50px 20px; color: var(--color-text-muted); font-size: 0.85rem; font-weight: 600; background: var(--color-white); border-radius: 12px; border: 1px dashed var(--color-border); }
+        input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-black); cursor: pointer; }
         
-        #loadingText { text-align: center; padding: 40px; color: var(--color-text-muted); display: none; font-weight: 600; font-size: 0.9rem; }
+        #loadingText { text-align: center; padding: 40px; color: var(--color-text-muted); display: none; font-weight: 600; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
     <div id="loginScreen">
-        <h1 style="color:#fff; margin-bottom:8px; font-size:1.6rem;">KATSU HESED</h1>
+        <h1 style="color:#fff; margin-bottom:8px; font-size:1.6rem; letter-spacing:0;">KATSU HESED</h1>
         <p style="color:#8B95A1; margin-bottom:40px;">재고/물품 관리 시스템<br>팀원 구글 계정으로 로그인해주세요.</p>
         <button id="googleLoginBtn" class="login-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
@@ -250,7 +254,6 @@
         <div id="loadingText">데이터 동기화 중...</div>
 
         <div id="printHiddenElements">
-            
             <div id="inputFormSection" class="form-card" style="display:none;">
                 <div class="category-tabs">
                     <button class="cat-tab active" data-cat="uniform">유니폼</button>
@@ -285,23 +288,35 @@
                         </div>
                         <div class="size-grid" id="sizeGrid"></div>
                     </div>
+                    
                     <div id="deliveryFields">
-                        <div class="input-row">
+                        <div class="input-row" id="singleCostRow">
                             <div class="input-group">
                                 <label for="costInput">1개당 원가</label>
-                                <input type="number" id="costInput" placeholder="입력/자동" required>
+                                <input type="number" id="costInput" placeholder="입력/자동">
                                 <div id="learnedPriceHelper" class="helper-text">최신 단가 적용됨</div>
                             </div>
+                        </div>
+                        <div class="input-row" id="multiCostRow" style="display: none;">
                             <div class="input-group">
-                                <label id="deliveryPriceLabel">총 청구액</label>
-                                <input type="text" id="deliveryPriceInput" readonly placeholder="자동 계산">
+                                <label>소형 원가</label>
+                                <input type="number" id="costInputSmall" placeholder="소형 원가">
+                            </div>
+                            <div class="input-group">
+                                <label>대형 원가</label>
+                                <input type="number" id="costInputLarge" placeholder="대형 원가">
                             </div>
                         </div>
+                        <div class="input-group">
+                            <label id="deliveryPriceLabel">총 청구액</label>
+                            <input type="text" id="deliveryPriceInput" readonly placeholder="자동 계산">
+                        </div>
                     </div>
+
                     <div id="orderFields" style="display: none;">
-                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:12px; background:var(--color-bg); padding:10px 14px; border-radius:10px;">
+                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:12px; background:var(--color-bg); padding:10px 12px; border-radius:10px;">
                             <input type="checkbox" id="vatCheck" checked>
-                            <label for="vatCheck" style="margin:0; font-size:0.9rem; cursor:pointer;">부가세 10% 포함</label>
+                            <label for="vatCheck" style="margin:0; font-size:0.85rem; cursor:pointer;">부가세 10% 포함</label>
                         </div>
                         <div class="input-row">
                             <div class="input-group">
@@ -325,8 +340,8 @@
 
             <div id="inventorySection" style="display:none;">
                 <div id="inventoryContent"></div>
-                <form id="editInventoryForm" style="display:none; margin-top:20px; background:var(--color-white); padding:16px; border-radius:12px; border:1px solid var(--color-border);">
-                    <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px; color:var(--color-text);">※ 변동이 있는 칸만 고쳐주세요. (조정 기록 생성)</div>
+                <form id="editInventoryForm" style="display:none; margin-top:16px; background:var(--color-white); padding:16px; border-radius:12px; border:1px solid var(--color-border);">
+                    <div style="font-size:0.8rem; font-weight:700; margin-bottom:12px; color:var(--color-text);">※ 변동이 있는 칸만 고쳐주세요. (조정 기록 생성)</div>
                     <button type="submit" class="btn-action primary">수정 완료</button>
                     <button type="button" class="btn-action" onclick="cancelEditInventory()">취소</button>
                 </form>
@@ -335,7 +350,6 @@
             <div id="profitSection" style="display:none;"><div id="profitContent"></div></div>
             <div id="monthSummarySection" style="display:none;"><div id="monthSummaryContent"></div></div>
             <div id="searchSummaryArea"></div>
-            
             <div id="recordListArea" style="display:none;"><div id="recordList"></div></div>
         </div>
     </div>
@@ -390,10 +404,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        // ★ 앱 모드에서 먹통 현상을 막기 위해 Popup 사용
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ★★★ 여기에 본인의 Firebase 설정값을 다시 꼭 넣어주세요! ★★★
+        // ★★★ 여기에 본인의 Firebase 설정값을 넣어주세요! ★★★
 const firebaseConfig = {
   apiKey: "AIzaSyANj0f_hc1zGXTnTM4TZt-kQTS-dY0jFPY",
   authDomain: "katsu-hesed-minutes.firebaseapp.com",
@@ -427,38 +440,16 @@ const firebaseConfig = {
         let currentCat = 'uniform'; let currentType = 'delivery'; let currentTotalQty = 0;
         let currentView = { type: 'home', val: null }; let isInventoryEditing = false;
 
-        const loginScreen = document.getElementById('loginScreen');
-        const googleLoginBtn = document.getElementById('googleLoginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const mainContainer = document.getElementById('mainContainer');
-        const loadingText = document.getElementById('loadingText');
-        const viewTitleText = document.getElementById('viewTitleText');
-        const viewTitleContainer = document.getElementById('viewTitleContainer');
-        const btnEditInventory = document.getElementById('btnEditInventory');
-        const inputFormSection = document.getElementById('inputFormSection');
-        const recordListArea = document.getElementById('recordListArea');
-        const recordList = document.getElementById('recordList');
-        const inventorySection = document.getElementById('inventorySection');
-        const inventoryContent = document.getElementById('inventoryContent');
-        const editInventoryForm = document.getElementById('editInventoryForm');
-        const profitSection = document.getElementById('profitSection');
-        const profitContent = document.getElementById('profitContent');
-        const monthSummarySection = document.getElementById('monthSummarySection');
-        const monthSummaryContent = document.getElementById('monthSummaryContent');
-        const searchSummaryArea = document.getElementById('searchSummaryArea');
-        
-        const itemSelect = document.getElementById('itemSelect');
-        const partnerSelect = document.getElementById('partnerSelect');
-        const partnerLabel = document.getElementById('partnerLabel');
-        const sizeGrid = document.getElementById('sizeGrid');
-        const totalQtyDisplay = document.getElementById('totalQtyDisplay');
-        const costInput = document.getElementById('costInput');
-        const deliveryPriceInput = document.getElementById('deliveryPriceInput');
-        const deliveryPriceLabel = document.getElementById('deliveryPriceLabel');
-        const totalOrderAmount = document.getElementById('totalOrderAmount');
-        const calcUnitPrice = document.getElementById('calcUnitPrice');
-        const vatCheck = document.getElementById('vatCheck');
-        const dateInput = document.getElementById('dateInput');
+        const loginScreen = document.getElementById('loginScreen'); const mainContainer = document.getElementById('mainContainer'); const loadingText = document.getElementById('loadingText');
+        const viewTitleText = document.getElementById('viewTitleText'); const viewTitleContainer = document.getElementById('viewTitleContainer'); const btnEditInventory = document.getElementById('btnEditInventory');
+        const inputFormSection = document.getElementById('inputFormSection'); const recordListArea = document.getElementById('recordListArea'); const recordList = document.getElementById('recordList');
+        const inventorySection = document.getElementById('inventorySection'); const inventoryContent = document.getElementById('inventoryContent'); const editInventoryForm = document.getElementById('editInventoryForm');
+        const profitSection = document.getElementById('profitSection'); const profitContent = document.getElementById('profitContent');
+        const monthSummarySection = document.getElementById('monthSummarySection'); const monthSummaryContent = document.getElementById('monthSummaryContent'); const searchSummaryArea = document.getElementById('searchSummaryArea');
+        const itemSelect = document.getElementById('itemSelect'); const partnerSelect = document.getElementById('partnerSelect'); const partnerLabel = document.getElementById('partnerLabel');
+        const sizeGrid = document.getElementById('sizeGrid'); const totalQtyDisplay = document.getElementById('totalQtyDisplay'); const costInput = document.getElementById('costInput');
+        const deliveryPriceInput = document.getElementById('deliveryPriceInput'); const deliveryPriceLabel = document.getElementById('deliveryPriceLabel'); const totalOrderAmount = document.getElementById('totalOrderAmount');
+        const calcUnitPrice = document.getElementById('calcUnitPrice'); const vatCheck = document.getElementById('vatCheck'); const dateInput = document.getElementById('dateInput');
         const learnedPriceHelper = document.getElementById('learnedPriceHelper');
 
         function initApp() {
@@ -466,29 +457,22 @@ const firebaseConfig = {
             dateInput.valueAsDate = new Date(); updateItemOptions(); toggleMode();
         }
 
-        // ★ 로그인 더블 클릭 방지 및 팝업 에러 처리 완벽 로직
-        const svgIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`;
-
+        const googleLoginBtn = document.getElementById('googleLoginBtn');
         googleLoginBtn.addEventListener('click', async () => {
             try {
-                googleLoginBtn.disabled = true;
-                document.getElementById('loginBtnText').innerText = '로그인 진행 중...';
+                googleLoginBtn.disabled = true; document.getElementById('loginBtnText').innerText = '로그인 진행 중...';
                 await signInWithPopup(auth, provider);
-            } catch (error) {
-                googleLoginBtn.disabled = false;
-                document.getElementById('loginBtnText').innerText = 'Google 계정으로 시작하기';
-                // 팝업 취소 에러는 무시
-                if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
-                    alert("로그인 오류: " + error.message);
-                }
+            } catch (e) {
+                googleLoginBtn.disabled = false; document.getElementById('loginBtnText').innerText = 'Google 계정으로 시작하기';
+                if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') alert("로그인 오류: " + e.message);
             }
         });
 
-        logoutBtn.addEventListener('click', () => signOut(auth).then(() => { if(unsubscribeRecords) unsubscribeRecords(); if(unsubscribeSettings) unsubscribeSettings(); }));
+        document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth).then(() => { if(unsubscribeRecords) unsubscribeRecords(); if(unsubscribeSettings) unsubscribeSettings(); }));
 
         onAuthStateChanged(auth, (user) => {
-            if (user) { loginScreen.style.display = 'none'; mainContainer.style.display = 'block'; logoutBtn.style.display = 'block'; startFetchingData(); } 
-            else { loginScreen.style.display = 'flex'; mainContainer.style.display = 'none'; logoutBtn.style.display = 'none'; }
+            if (user) { loginScreen.style.display = 'none'; mainContainer.style.display = 'block'; document.getElementById('logoutBtn').style.display = 'block'; startFetchingData(); } 
+            else { loginScreen.style.display = 'flex'; mainContainer.style.display = 'none'; document.getElementById('logoutBtn').style.display = 'none'; }
         });
 
         function startFetchingData() {
@@ -603,10 +587,11 @@ const firebaseConfig = {
                 for (let item in inventoryData[cat]) {
                     inventoryData[cat][item].forEach((size, index) => {
                         const qty = stock[item][size];
+                        // ★ 임계점 로직
                         const threshold = (item === '노루지') ? 2000 : 5;
                         const qtyClass = qty <= threshold ? 'text-loss' : '';
                         html += `<tr>`; if (index === 0) html += `<td rowspan="${inventoryData[cat][item].length}" class="row-header">${item}</td>`;
-                        html += `<td>${size}</td><td class="${qtyClass}"><strong style="font-size:1.1rem;">${qty}</strong> 개</td></tr>`;
+                        html += `<td>${size}</td><td class="${qtyClass}"><strong style="font-size:1.05rem;">${qty}</strong> 개</td></tr>`;
                     });
                 }
             }
@@ -622,7 +607,7 @@ const firebaseConfig = {
                     for (let item in inventoryData[cat]) {
                         inventoryData[cat][item].forEach((size, index) => {
                             html += `<tr>`; if (index === 0) html += `<td rowspan="${inventoryData[cat][item].length}" class="row-header">${item}</td>`;
-                            html += `<td>${size}</td><td><input type="number" class="edit-stock-input" data-item="${item}" data-size="${size}" data-old="${stock[item][size]}" value="${stock[item][size]}" style="text-align:center; padding:8px; border:1px solid var(--color-border); background:var(--color-bg);"></td></tr>`;
+                            html += `<td>${size}</td><td><input type="number" class="edit-stock-input" data-item="${item}" data-size="${size}" data-old="${stock[item][size]}" value="${stock[item][size]}" style="text-align:center; padding:6px; border:1px solid var(--color-border); background:var(--color-bg);"></td></tr>`;
                         });
                     }
                 }
@@ -642,6 +627,7 @@ const firebaseConfig = {
             try { for(let adj of adjustments) await addDoc(collection(db, "katsu_inventory"), adj); alert("조정 완료"); cancelEditInventory(); } catch(err) { alert("조정 오류"); }
         });
 
+        // --- 손익 ---
         function renderProfitTable() {
             const iProf = {}; for(let cat in inventoryData) for(let item in inventoryData[cat]) iProf[item] = { delivery:0, order:0 };
             let tOrder = 0; let tDeliv = 0; const gYear = {};
@@ -654,14 +640,14 @@ const firebaseConfig = {
             });
 
             const tProf = tDeliv - tOrder;
-            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:24px 20px; border-radius:16px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.85rem; color:var(--color-text-muted); margin-bottom:8px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:1.8rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:10px; font-size:0.95rem; font-weight:800;">품목별 누적 손익</h3><div class="profit-grid">`;
+            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:20px; border-radius:14px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.8rem; color:#aaa; margin-bottom:6px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:1.6rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:10px; font-size:0.9rem; font-weight:800;">품목별 누적 손익</h3><div class="profit-grid">`;
             for(let item in iProf) { const p = iProf[item].delivery - iProf[item].order; html += `<div class="profit-card"><span>${item}</span><strong class="${p>=0?'text-profit':'text-loss'}">${p>0?'+':''}${p.toLocaleString()}</strong></div>`; }
             html += `</div>`;
             Object.keys(gYear).sort().reverse().forEach((y, idx) => {
                 let rows = ''; let yO = 0, yD = 0;
                 Object.keys(gYear[y]).sort().reverse().forEach(m => { yO += gYear[y][m].order; yD += gYear[y][m].delivery; const p = gYear[y][m].delivery - gYear[y][m].order; rows += `<tr><td>${parseInt(m)}월</td><td>${gYear[y][m].delivery.toLocaleString()}</td><td>${gYear[y][m].order.toLocaleString()}</td><td class="${p>=0?'text-profit':'text-loss'}">${p.toLocaleString()}</td></tr>`; });
                 const yp = yD - yO;
-                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:12px; border:1px solid var(--color-border); border-radius:12px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:16px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-bg); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
+                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:12px; border:1px solid var(--color-border); border-radius:10px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:12px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-white); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
             });
             profitContent.innerHTML = html;
         }
@@ -681,6 +667,7 @@ const firebaseConfig = {
             monthSummaryContent.innerHTML = `<div class="profit-grid"><div class="profit-card"><span>납품 (수익)</span><strong>${mD.toLocaleString()}원</strong></div><div class="profit-card"><span>발주 (비용)</span><strong>${mO.toLocaleString()}원</strong></div><div class="profit-card full"><span>해당 월 순손익</span><strong class="${mP>=0?'text-profit':'text-loss'}">${mP.toLocaleString()}원</strong></div></div><div class="table-responsive"><table class="data-table"><thead><tr><th>일자</th><th>구분</th><th>품목</th><th>수량</th><th>금액(원)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
         }
 
+        // --- 폼 로직 ---
         function getFranchisePrices() { return globalSettings.franchisePrices; }
         function getPartners() { if (currentType === 'delivery') return { direct: globalSettings.partners.direct, franchise: globalSettings.partners.franchise }; else return globalSettings.partners.suppliers; }
 
@@ -696,41 +683,95 @@ const firebaseConfig = {
             calculateTotal();
         }
         partnerSelect.addEventListener('change', calculateTotal);
+
         function updateItemOptions() { itemSelect.innerHTML = Object.keys(inventoryData[currentCat]).map(i => `<option value="${i}">${i}</option>`).join(''); renderSizeGrid(); }
         
         function renderSizeGrid() {
             const item = itemSelect.value; if (!item) return;
             sizeGrid.innerHTML = inventoryData[currentCat][item].map(s => `<div class="size-item"><span>${s}</span><input type="number" class="size-input" data-size="${s}" min="0" placeholder="0"></div>`).join('');
-            document.querySelectorAll('.size-input').forEach(i => i.addEventListener('input', calculateTotal)); calculateTotal(); checkLearnedPrice();
+            document.querySelectorAll('.size-input').forEach(i => i.addEventListener('input', calculateTotal)); 
+            
+            // ★ 후카박스 소형/대형 원가 분리 UI 토글
+            if (item === '후카박스' && currentType === 'delivery') {
+                document.getElementById('singleCostRow').style.display = 'none';
+                document.getElementById('multiCostRow').style.display = 'grid';
+                costInput.required = false;
+                document.getElementById('costInputSmall').required = true;
+                document.getElementById('costInputLarge').required = true;
+            } else if (currentType === 'delivery') {
+                document.getElementById('singleCostRow').style.display = 'grid';
+                document.getElementById('multiCostRow').style.display = 'none';
+                costInput.required = true;
+                document.getElementById('costInputSmall').required = false;
+                document.getElementById('costInputLarge').required = false;
+            }
+            calculateTotal(); checkLearnedPrice();
         }
+
+        document.getElementById('costInputSmall').addEventListener('input', calculateTotal);
+        document.getElementById('costInputLarge').addEventListener('input', calculateTotal);
         
         function calculateTotal() {
             currentTotalQty = 0; let totalDelivPrice = 0;
-            const cost = parseInt(costInput.value) || 0; const item = itemSelect.value; const fp = getFranchisePrices();
-            const sel = partnerSelect.options[partnerSelect.selectedIndex]; const isDirect = sel ? sel.dataset.type === 'direct' : false;
+            const cost = parseInt(costInput.value) || 0;
+            const item = itemSelect.value;
+            const fp = getFranchisePrices();
+            const sel = partnerSelect.options[partnerSelect.selectedIndex];
+            const isDirect = sel ? sel.dataset.type === 'direct' : false;
 
             document.querySelectorAll('.size-input').forEach(input => {
-                const q = parseInt(input.value) || 0; currentTotalQty += q;
-                if (currentType === 'delivery' && q > 0 && cost > 0) {
-                    if (isDirect) { totalDelivPrice += cost * q; } 
-                    else {
-                        let cPrice = (item === '후카박스') ? (fp[`후카박스_${input.dataset.size}`] ? parseInt(fp[`후카박스_${input.dataset.size}`]) : cost*2) : (fp[item] ? parseInt(fp[item]) : cost*2);
-                        totalDelivPrice += cPrice * q;
+                const q = parseInt(input.value) || 0;
+                currentTotalQty += q;
+                if (currentType === 'delivery' && q > 0) {
+                    if (item === '후카박스') {
+                        const cS = parseInt(document.getElementById('costInputSmall').value) || 0;
+                        const cL = parseInt(document.getElementById('costInputLarge').value) || 0;
+                        const baseCost = input.dataset.size === '소형' ? cS : cL;
+                        if (isDirect) {
+                            totalDelivPrice += baseCost * q;
+                        } else {
+                            const fPrice = fp[`후카박스_${input.dataset.size}`] ? parseInt(fp[`후카박스_${input.dataset.size}`]) : (baseCost * 2);
+                            totalDelivPrice += fPrice * q;
+                        }
+                    } else if (cost > 0) {
+                        if (isDirect) { totalDelivPrice += cost * q; } 
+                        else {
+                            let cPrice = fp[item] ? parseInt(fp[item]) : (cost * 2);
+                            totalDelivPrice += cPrice * q;
+                        }
                     }
                 }
             });
             totalQtyDisplay.innerText = currentTotalQty;
-            if (currentType === 'delivery' && currentTotalQty > 0 && cost > 0) { deliveryPriceLabel.innerText = isDirect ? '청구액 (직영)' : '청구액 (가맹)'; deliveryPriceInput.value = totalDelivPrice.toLocaleString() + ' 원'; } 
-            else { deliveryPriceInput.value = ''; deliveryPriceLabel.innerText = '총 청구액'; }
+
+            if (currentType === 'delivery' && currentTotalQty > 0) {
+                // 후카박스 단가 체크 혹은 일반 단가 체크
+                if (item === '후카박스' || cost > 0) {
+                    deliveryPriceLabel.innerText = isDirect ? '청구액 (직영)' : '청구액 (가맹)';
+                    deliveryPriceInput.value = totalDelivPrice.toLocaleString() + ' 원';
+                }
+            } else { deliveryPriceInput.value = ''; deliveryPriceLabel.innerText = '총 청구액'; }
+            
             const tAmt = parseInt(totalOrderAmount.value) || 0;
             calcUnitPrice.value = (currentType === 'order' && currentTotalQty > 0 && tAmt > 0) ? Math.round(tAmt / currentTotalQty).toLocaleString() + ' 원' : '';
         }
         
         costInput.addEventListener('input', calculateTotal); totalOrderAmount.addEventListener('input', calculateTotal);
+        
         function toggleMode() {
             renderPartnerSelect();
-            if (currentType === 'delivery') { deliveryFields.style.display = 'block'; orderFields.style.display = 'none'; costInput.required = true; totalOrderAmount.required = false; checkLearnedPrice(); } 
-            else { deliveryFields.style.display = 'none'; orderFields.style.display = 'block'; costInput.required = false; totalOrderAmount.required = true; learnedPriceHelper.style.display = 'none'; }
+            if (currentType === 'delivery') { 
+                document.getElementById('deliveryFields').style.display = 'block'; 
+                document.getElementById('orderFields').style.display = 'none'; 
+                document.getElementById('totalOrderAmount').required = false; 
+                renderSizeGrid(); // 후카박스 분리 대응 재렌더링
+                checkLearnedPrice(); 
+            } else { 
+                document.getElementById('deliveryFields').style.display = 'none'; 
+                document.getElementById('orderFields').style.display = 'block'; 
+                costInput.required = false; document.getElementById('costInputSmall').required = false; document.getElementById('costInputLarge').required = false;
+                document.getElementById('totalOrderAmount').required = true; learnedPriceHelper.style.display = 'none'; 
+            }
             calculateTotal();
         }
         function checkLearnedPrice() {
@@ -749,19 +790,35 @@ const firebaseConfig = {
             const record = { category: currentCat === 'uniform' ? '유니폼' : '물품', type: currentType, item: itemSelect.value, partner: partnerSelect.value, sizes: sizesData, totalQty: currentTotalQty, date: dateInput.value, author: auth.currentUser.email, timestamp: Date.now() };
             
             if (currentType === 'delivery') {
-                const sel = partnerSelect.options[partnerSelect.selectedIndex]; record.isDirect = sel ? sel.dataset.type === 'direct' : false; record.cost = costInput.value;
+                const sel = partnerSelect.options[partnerSelect.selectedIndex]; record.isDirect = sel ? sel.dataset.type === 'direct' : false;
                 let totPrice = 0; const fp = getFranchisePrices();
-                record.sizes.forEach(s => {
-                    if (record.isDirect) totPrice += costInput.value * s.qty;
-                    else {
-                        let cP = (record.item === '후카박스') ? (fp[`후카박스_${s.size}`] || (costInput.value * 2)) : (fp[record.item] || (costInput.value * 2));
-                        totPrice += cP * s.qty;
-                    }
-                });
-                record.deliveryUnitPrice = record.isDirect ? costInput.value : "개별단가"; record.totalDeliveryPrice = totPrice;
+                let dPriceText = '';
+
+                // ★ 후카박스와 일반품목 저장 분리
+                if (record.item === '후카박스') {
+                    record.costSmall = document.getElementById('costInputSmall').value;
+                    record.costLarge = document.getElementById('costInputLarge').value;
+                    const cS = parseInt(record.costSmall) || 0; const cL = parseInt(record.costLarge) || 0;
+                    const fpS = fp['후카박스_소형'] ? parseInt(fp['후카박스_소형']) : (cS * 2);
+                    const fpL = fp['후카박스_대형'] ? parseInt(fp['후카박스_대형']) : (cL * 2);
+
+                    record.sizes.forEach(s => {
+                        if (s.size === '소형') totPrice += (record.isDirect ? cS : fpS) * s.qty;
+                        else if (s.size === '대형') totPrice += (record.isDirect ? cL : fpL) * s.qty;
+                    });
+                    dPriceText = record.isDirect ? `소 ${cS.toLocaleString()} / 대 ${cL.toLocaleString()}` : `소 ${fpS.toLocaleString()} / 대 ${fpL.toLocaleString()}`;
+                } else {
+                    record.cost = costInput.value; const baseC = parseInt(record.cost) || 0;
+                    const fpC = fp[record.item] ? parseInt(fp[record.item]) : (baseC * 2);
+                    record.sizes.forEach(s => { totPrice += (record.isDirect ? baseC : fpC) * s.qty; });
+                    dPriceText = (record.isDirect ? baseC : fpC).toLocaleString();
+                }
+
+                record.deliveryUnitPrice = dPriceText; // 실제 숫자로 저장 완료
+                record.totalDeliveryPrice = totPrice;
             } else { record.vat = vatCheck.checked ? '부가세 포함' : '별도'; record.totalAmount = totalOrderAmount.value; record.unitPrice = Math.round(record.totalAmount / currentTotalQty); }
             
-            try { await addDoc(collection(db, "katsu_inventory"), record); document.querySelectorAll('.size-input').forEach(i => i.value = ''); costInput.value = ''; deliveryPriceInput.value = ''; totalOrderAmount.value = ''; calcUnitPrice.value = ''; totalQtyDisplay.innerText = '0'; currentTotalQty = 0; alert("저장 완료"); } 
+            try { await addDoc(collection(db, "katsu_inventory"), record); document.querySelectorAll('.size-input').forEach(i => i.value = ''); costInput.value = ''; document.getElementById('costInputSmall').value = ''; document.getElementById('costInputLarge').value = ''; deliveryPriceInput.value = ''; totalOrderAmount.value = ''; calcUnitPrice.value = ''; totalQtyDisplay.innerText = '0'; currentTotalQty = 0; alert("저장 완료"); } 
             catch(e) { alert("저장 오류"); }
         });
 
@@ -771,12 +828,12 @@ const firebaseConfig = {
         function renderModalList() {
             const p = getPartners(); const listDiv = document.getElementById('partnerList');
             if (currentType === 'delivery') {
-                let html = '<div style="font-weight:700; font-size:0.85rem; margin-bottom:8px; color:var(--color-text-muted);">🏢 직영점</div>';
-                p.direct.forEach((n, idx) => html += `<div class="partner-item" style="padding:10px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('direct', ${idx})">삭제</button></div>`);
-                html += '<div style="font-weight:700; font-size:0.85rem; margin:20px 0 8px; color:var(--color-text-muted);">🤝 가맹점</div>';
-                p.franchise.forEach((n, idx) => html += `<div class="partner-item" style="padding:10px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('franchise', ${idx})">삭제</button></div>`);
+                let html = '<div style="font-weight:700; font-size:0.8rem; margin-bottom:6px; color:var(--color-text-muted);">🏢 직영점</div>';
+                p.direct.forEach((n, idx) => html += `<div class="partner-item" style="padding:8px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('direct', ${idx})">삭제</button></div>`);
+                html += '<div style="font-weight:700; font-size:0.8rem; margin:16px 0 6px; color:var(--color-text-muted);">🤝 가맹점</div>';
+                p.franchise.forEach((n, idx) => html += `<div class="partner-item" style="padding:8px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('franchise', ${idx})">삭제</button></div>`);
                 listDiv.innerHTML = html;
-            } else { listDiv.innerHTML = p.map((n, idx) => `<div class="partner-item" style="padding:10px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('supplier', ${idx})">삭제</button></div>`).join(''); }
+            } else { listDiv.innerHTML = p.map((n, idx) => `<div class="partner-item" style="padding:8px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;"><span>${n}</span><button class="btn-delete-icon" onclick="deletePartner('supplier', ${idx})">삭제</button></div>`).join(''); }
         }
         
         window.deletePartner = async function(t, idx) { 
@@ -802,9 +859,11 @@ const firebaseConfig = {
             for(let cat in inventoryData) {
                 for(let item in inventoryData[cat]) {
                     if (item === '후카박스') {
-                        html += `<div class="setting-row"><span>${item} (소형)</span><input type="number" id="price_후카박스_소형" class="setting-input" value="${fp['후카박스_소형']||''}" placeholder="기본 2배수"></div>`;
-                        html += `<div class="setting-row"><span>${item} (대형)</span><input type="number" id="price_후카박스_대형" class="setting-input" value="${fp['후카박스_대형']||''}" placeholder="기본 2배수"></div>`;
-                    } else { html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="기본 2배수"></div>`; }
+                        html += `<div class="setting-row"><span>${item} (소형)</span><input type="number" id="price_후카박스_소형" class="setting-input" value="${fp['후카박스_소형']||''}" placeholder="2배수"></div>`;
+                        html += `<div class="setting-row"><span>${item} (대형)</span><input type="number" id="price_후카박스_대형" class="setting-input" value="${fp['후카박스_대형']||''}" placeholder="2배수"></div>`;
+                    } else {
+                        html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="2배수"></div>`;
+                    }
                 }
             }
             document.getElementById('franchisePriceInputs').innerHTML = html; document.getElementById('settingsModal').style.display = 'flex';
@@ -817,7 +876,9 @@ const firebaseConfig = {
                     if(item === '후카박스') {
                         const v1 = document.getElementById(`price_후카박스_소형`).value; if(v1) fp['후카박스_소형'] = v1;
                         const v2 = document.getElementById(`price_후카박스_대형`).value; if(v2) fp['후카박스_대형'] = v2;
-                    } else { const v = document.getElementById(`price_${item}`).value; if(v) fp[item] = v; }
+                    } else {
+                        const v = document.getElementById(`price_${item}`).value; if(v) fp[item] = v; 
+                    }
                 }
             }
             await setDoc(doc(db, "katsu_settings", "global"), { franchisePrices: fp }, { merge: true }); alert('저장되었습니다.'); 
@@ -840,12 +901,20 @@ const firebaseConfig = {
             
             const fpSettings = getFranchisePrices();
             const monthPrices = {};
-            for(let cat in inventoryData) for(let item in inventoryData[cat]) monthPrices[item] = { cost: null, direct: null, franchise: null };
+            for(let cat in inventoryData) for(let item in inventoryData[cat]) monthPrices[item] = { cost: null, costSmall: null, costLarge: null, direct: null, franchise: null };
 
             monthRecords.forEach(r => {
                 if (r.item && monthPrices[r.item]) {
                     if (r.type === 'order' && r.unitPrice) { if (!monthPrices[r.item].cost) monthPrices[r.item].cost = r.unitPrice; }
-                    if (r.type === 'delivery') { if (r.cost) monthPrices[r.item].cost = r.cost; if (r.isDirect) monthPrices[r.item].direct = r.cost; }
+                    if (r.type === 'delivery') {
+                        if (r.item === '후카박스') {
+                            if (r.costSmall) monthPrices[r.item].costSmall = r.costSmall;
+                            if (r.costLarge) monthPrices[r.item].costLarge = r.costLarge;
+                        } else {
+                            if (r.cost) monthPrices[r.item].cost = r.cost;
+                            if (r.isDirect) monthPrices[r.item].direct = r.cost; 
+                        }
+                    }
                 }
             });
 
@@ -856,14 +925,18 @@ const firebaseConfig = {
             for(let cat in inventoryData) {
                 for(let item in inventoryData[cat]) {
                     const mp = monthPrices[item];
-                    const cost = mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-';
-                    const direct = mp.direct ? Number(mp.direct).toLocaleString() + '원' : (mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-');
-                    let franchise = '-';
+                    let cost = '-', direct = '-', franchise = '-';
+                    
                     if (item === '후카박스') {
-                        const fs = fpSettings['후카박스_소형'] ? Number(fpSettings['후카박스_소형']).toLocaleString()+'원' : (mp.cost ? Number(mp.cost*2).toLocaleString()+'원' : '-');
-                        const fl = fpSettings['후카박스_대형'] ? Number(fpSettings['후카박스_대형']).toLocaleString()+'원' : (mp.cost ? Number(mp.cost*2).toLocaleString()+'원' : '-');
-                        franchise = `소: ${fs} / 대: ${fl}`;
+                        const cS = mp.costSmall ? Number(mp.costSmall).toLocaleString()+'원' : '-';
+                        const cL = mp.costLarge ? Number(mp.costLarge).toLocaleString()+'원' : '-';
+                        cost = `소 ${cS} / 대 ${cL}`; direct = cost;
+                        const fS = fpSettings['후카박스_소형'] ? Number(fpSettings['후카박스_소형']).toLocaleString()+'원' : (mp.costSmall ? Number(mp.costSmall*2).toLocaleString()+'원' : '-');
+                        const fL = fpSettings['후카박스_대형'] ? Number(fpSettings['후카박스_대형']).toLocaleString()+'원' : (mp.costLarge ? Number(mp.costLarge*2).toLocaleString()+'원' : '-');
+                        franchise = `소 ${fS} / 대 ${fL}`;
                     } else {
+                        cost = mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-';
+                        direct = mp.direct ? Number(mp.direct).toLocaleString() + '원' : (mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-');
                         if (fpSettings[item]) franchise = Number(fpSettings[item]).toLocaleString() + '원 (설정가)';
                         else if (mp.cost) franchise = Number(mp.cost * 2).toLocaleString() + '원';
                     }
@@ -922,9 +995,10 @@ const firebaseConfig = {
                 let pHTML = '';
                 if (isD) {
                     let priceLabelText = data.isDirect ? '직영 원가' : '가맹 납품가';
-                    let uPriceText = (!data.isDirect && data.item === '후카박스') ? '사이즈별 설정가' : Number(data.deliveryUnitPrice || data.cost).toLocaleString() + '원';
+                    // ★ 문자열로 저장된 deliveryUnitPrice 그대로 출력 (끝에 '원'을 붙임)
+                    let uPriceText = data.deliveryUnitPrice + '원';
                     pHTML = `<div class="rc-price-info">단가 ${uPriceText} <span style="font-size:0.7rem;">(${priceLabelText})</span></div><div class="rc-total-price" style="color:var(--color-profit);">${Number(data.totalDeliveryPrice).toLocaleString()}원</div>`;
-                } else { pHTML = `<div class="rc-price-info">단가 ${Number(data.unitPrice).toLocaleString()}</div><div class="rc-total-price">${Number(data.totalAmount).toLocaleString()}원 <span style="font-size:0.7rem; font-weight:normal;">${data.vat?'('+data.vat+')':''}</span></div>`; }
+                } else { pHTML = `<div class="rc-price-info">단가 ${Number(data.unitPrice).toLocaleString()}원</div><div class="rc-total-price">${Number(data.totalAmount).toLocaleString()}원 <span style="font-size:0.7rem; font-weight:normal;">${data.vat?'('+data.vat+')':''}</span></div>`; }
                 return `<div class="record-card-compact"><div class="rc-top"><div class="rc-left"><span class="rc-badge ${isD?'bg-delivery':'bg-order'}">${isD?'납품':'발주'}</span><span class="rc-title">${data.item}</span></div><div class="rc-right"><span class="rc-date">${data.date.substring(2)}</span><button class="btn-delete-icon" onclick="deleteRecord('${data.id}')">✕</button></div></div><div class="rc-mid"><span class="rc-partner">${data.partner}</span><span class="rc-sizes">[${sizeTxt}]</span><span class="rc-qty">총 <strong>${data.totalQty}</strong>개</span></div><div class="rc-bot">${pHTML}</div></div>`;
             }).join('');
         }
