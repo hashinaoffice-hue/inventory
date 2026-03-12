@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
     <title>재고관리</title>
     
     <link rel="icon" href="logo.png">
@@ -38,6 +39,17 @@
         * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; letter-spacing: -0.01em; }
         body { background-color: var(--color-bg); color: var(--color-text); -webkit-font-smoothing: antialiased; padding-bottom: 60px; overflow-x: hidden; transition: background-color 0.2s, color 0.2s; }
 
+        /* ★ 누락되었던 로그인 화면 전체 덮기 CSS 복구 */
+        #loginScreen {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #000000; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center; padding: 20px;
+        }
+        .login-btn { transition: opacity 0.2s; }
+        .login-btn:active { opacity: 0.8; }
+
+        /* 인쇄 전용 스타일 */
         @media print {
             body { background: #fff !important; color: #000 !important; }
             header, #sidebar, #sidebarOverlay, #inputFormSection, .view-title, #printHiddenElements, .modal-overlay, #loginScreen { display: none !important; }
@@ -48,16 +60,18 @@
         }
 
         button { cursor: pointer; transition: all 0.2s; }
-        input, select { background-color: var(--color-white); color: var(--color-text); border: 1px solid var(--color-border); font-size: 15px; padding: 12px 14px; border-radius: 8px; width: 100%; transition: border-color 0.2s, background-color 0.2s, color 0.2s; }
+        input, select { background-color: var(--color-white); color: var(--color-text); border: 1px solid var(--color-border); font-size: 16px; padding: 12px 14px; border-radius: 8px; width: 100%; transition: border-color 0.2s, background-color 0.2s, color 0.2s; }
         input:focus, select:focus { outline: none; border-color: var(--color-black); box-shadow: 0 0 0 2px rgba(26, 28, 30, 0.1); }
         select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23868E96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 36px; }
 
+        /* 헤더 */
         header { background-color: var(--color-white); border-bottom: 1px solid var(--color-border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
         .header-left { display: flex; align-items: center; }
-        .menu-btn { background: none; border: none; font-size: 1.6rem; color: var(--color-black); margin-right: 14px; padding: 0; }
-        header h1 { font-size: 1.15rem; font-weight: 800; color: var(--color-black); margin: 0; }
+        .menu-btn { background: none; border: none; font-size: 1.6rem; color: var(--color-text); margin-right: 14px; padding: 0; }
+        header h1 { font-size: 1.15rem; font-weight: 800; color: var(--color-text); margin: 0; }
         .logout-btn { background: none; border: 1px solid var(--color-border); color: var(--color-text); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; }
 
+        /* 사이드바 */
         .sidebar { width: var(--sidebar-width); background-color: var(--color-white); height: 100vh; position: fixed; top: 0; left: calc(-1 * var(--sidebar-width)); padding-top: 58px; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 90; border-right: 1px solid var(--color-border); display: flex; flex-direction: column; box-shadow: 8px 0 24px rgba(0,0,0,0.04); }
         .sidebar.open { left: 0; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 80; backdrop-filter: blur(2px); }
@@ -82,6 +96,7 @@
         .search-box button { background: var(--color-black); color: var(--color-bg); border: none; padding: 0 14px; border-radius: 8px; font-size: 1rem; }
         .btn-settings { width: 100%; padding: 12px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; font-weight: 700; font-size: 0.95rem; color: var(--color-text); }
 
+        /* 폼 & UI */
         .container { max-width: 640px; margin: 0 auto; padding: 16px; display: none; }
         .view-title { font-size: 1.25rem; font-weight: 800; border-bottom: 2px solid var(--color-black); padding-bottom: 10px; margin-bottom: 20px; display:flex; justify-content: space-between; align-items:flex-end; color: var(--color-text); }
         .form-card { background: var(--color-white); padding: 20px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); border: 1px solid var(--color-border); }
@@ -118,6 +133,7 @@
         .summary-item strong { font-size: 1.1rem; color: var(--color-profit); font-weight: 800;}
         
         .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); transition: all 0.2s; }
+        .record-card-compact:hover { border-color: var(--color-text-muted); }
         .rc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .rc-left, .rc-right { display: flex; align-items: center; gap: 8px; }
         .rc-badge { font-size: 0.7rem; padding: 4px 6px; border-radius: 4px; font-weight: 800; line-height: 1; }
@@ -142,7 +158,6 @@
         .data-table th { background-color: var(--color-light-gray); color: var(--color-text-muted); font-weight: 700; font-size: 0.85rem; }
         .data-table tbody tr:last-child td { border-bottom: none; }
         .row-header { font-weight: 800; color: var(--color-text); }
-
         .text-profit { color: var(--color-profit); font-weight: 800; }
         .text-loss { color: var(--color-loss); font-weight: 800; }
 
@@ -272,7 +287,7 @@
                     </div>
                     <div id="orderFields" style="display: none;">
                         <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:16px; background:var(--color-bg); padding:12px 14px; border-radius:8px; border:1px solid var(--color-border);">
-                            <input type="checkbox" id="vatCheck" checked>
+                            <input type="checkbox" id="vatCheck" checked style="width:20px; height:20px;">
                             <label for="vatCheck" style="margin:0; cursor:pointer;">부가세 10% 포함</label>
                         </div>
                         <div class="input-group">
@@ -363,7 +378,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ★★★ 여기에 본인의 Firebase 설정값을 다시 꼭 붙여넣어 주세요! ★★★
+        // ★★★ 여기에 본인의 Firebase 설정값을 꼭 넣어주세요! ★★★
 const firebaseConfig = {
   apiKey: "AIzaSyANj0f_hc1zGXTnTM4TZt-kQTS-dY0jFPY",
   authDomain: "katsu-hesed-minutes.firebaseapp.com",
@@ -389,7 +404,6 @@ const firebaseConfig = {
             supply: { '후카박스': ['소형', '대형'], '노루지': ['OS'] }
         };
 
-        // ★ 전역 동기화 설정 객체
         let globalSettings = {
             franchisePrices: {},
             partners: {
@@ -461,23 +475,19 @@ const firebaseConfig = {
         function startFetchingData() {
             loadingText.style.display = 'block';
 
-            // 1. 전역 설정(단가, 거래처, 비번) 리스너
             const settingsRef = doc(db, "katsu_settings", "global");
             unsubscribeSettings = onSnapshot(settingsRef, (docSnap) => {
                 if (docSnap.exists()) {
                     globalSettings = docSnap.data();
-                    // 구조 호환성 보장
                     if(!globalSettings.partners) globalSettings.partners = { direct: [], franchise: [], suppliers: [] };
                     if(!globalSettings.franchisePrices) globalSettings.franchisePrices = {};
                     if(!globalSettings.adminPwd) globalSettings.adminPwd = "9395";
                 } else {
                     setDoc(settingsRef, globalSettings);
                 }
-                renderPartnerSelect();
-                calculateTotal();
+                renderPartnerSelect(); calculateTotal();
             }, (err) => { console.error("설정 동기화 오류:", err); });
 
-            // 2. 기록 리스너
             const q = query(collection(db, "katsu_inventory"), orderBy("timestamp", "desc"));
             unsubscribeRecords = onSnapshot(q, (snapshot) => {
                 loadingText.style.display = 'none';
@@ -493,7 +503,6 @@ const firebaseConfig = {
             }, (err) => { loadingText.innerText = "데이터 권한이 없습니다."; });
         }
 
-        // 라우팅
         function refreshCurrentView() {
             inputFormSection.style.display = 'none'; inventorySection.style.display = 'none'; profitSection.style.display = 'none';
             monthSummarySection.style.display = 'none'; recordListArea.style.display = 'none'; btnEditInventory.style.display = 'none';
@@ -633,7 +642,6 @@ const firebaseConfig = {
             try { for(let adj of adjustments) await addDoc(collection(db, "katsu_inventory"), adj); alert("재고 조정 완료"); cancelEditInventory(); } catch(err) { alert("조정 오류"); }
         });
 
-        // --- 손익 ---
         function renderProfitTable() {
             const iProf = {}; for(let cat in inventoryData) for(let item in inventoryData[cat]) iProf[item] = { delivery:0, order:0 };
             let tOrder = 0; let tDeliv = 0; const gYear = {};
@@ -673,7 +681,6 @@ const firebaseConfig = {
             monthSummaryContent.innerHTML = `<div class="profit-grid"><div class="profit-card"><span>납품 (수익)</span><strong>${mD.toLocaleString()}원</strong></div><div class="profit-card"><span>발주 (비용)</span><strong>${mO.toLocaleString()}원</strong></div><div class="profit-card full"><span>해당 월 순손익</span><strong class="${mP>=0?'text-profit':'text-loss'}">${mP.toLocaleString()}원</strong></div></div><div class="table-responsive"><table class="data-table"><thead><tr><th>일자</th><th>구분</th><th>품목</th><th>수량</th><th>금액(원)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
         }
 
-        // --- 폼 로직 ---
         function getFranchisePrices() { return globalSettings.franchisePrices; }
         function getPartners() {
             if (currentType === 'delivery') return { direct: globalSettings.partners.direct, franchise: globalSettings.partners.franchise };
@@ -751,7 +758,6 @@ const firebaseConfig = {
         document.querySelectorAll('.type-tab').forEach(t => t.addEventListener('click', (e) => { document.querySelectorAll('.type-tab').forEach(el => el.classList.remove('active')); e.target.classList.add('active'); currentType = e.target.dataset.type; toggleMode(); }));
         itemSelect.addEventListener('change', renderSizeGrid);
 
-        // 파이어베이스 저장
         document.getElementById('recordForm').addEventListener('submit', async (e) => {
             e.preventDefault(); if (currentTotalQty <= 0) return alert("수량을 입력하세요.");
             const sizesData = []; document.querySelectorAll('.size-input').forEach(i => { const q = parseInt(i.value); if (q > 0) sizesData.push({ size: i.dataset.size, qty: q }); });
@@ -775,7 +781,6 @@ const firebaseConfig = {
             catch(e) { alert("저장 오류"); }
         });
 
-        // 모달 관리 & 전역 설정 동기화
         window.closeModal = function(id) { document.getElementById(id).style.display = 'none'; }
         document.getElementById('btnManagePartner').addEventListener('click', () => { document.getElementById('partnerModalTitle').innerText = currentType === 'delivery' ? '납품처 관리' : '발주처 관리'; document.getElementById('newBranchType').style.display = currentType === 'delivery' ? 'block' : 'none'; renderModalList(); document.getElementById('partnerModal').style.display = 'flex'; });
         
@@ -845,7 +850,6 @@ const firebaseConfig = {
             else { document.body.classList.remove('dark-mode'); localStorage.setItem('hesedDarkMode', 'false'); }
         });
 
-        // PDF 추출 로직
         function updatePDFMonthSelect() {
             const mSet = new Set(); allRecords.forEach(r => { if(r.date) mSet.add(r.date.substring(0,7)); });
             document.getElementById('pdfMonthSelect').innerHTML = Array.from(mSet).sort().reverse().map(m => `<option value="${m}">${m}</option>`).join('');
