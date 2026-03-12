@@ -25,13 +25,13 @@
             --color-black: #191F28;
             --color-white: #FFFFFF;
             --color-light-gray: #F9FAFB;
-            --color-profit: #3182F6; /* 납품/수익 탭 (블루) */
-            --color-loss: #F04452;   /* 발주/비용 탭 (레드) */
+            --color-profit: #3182F6; 
+            --color-loss: #F04452;   
             --sidebar-width: 250px;
         }
 
         body.dark-mode {
-            --color-bg: #121212; --color-text: #E5E8EB; --color-text-muted: #8B95A1;
+            --color-bg: #121212; --color-text: #EAEAEA; --color-text-muted: #8B95A1;
             --color-border: #2C2C35; --color-black: #FFFFFF; --color-white: #1C1C22;
             --color-light-gray: #24242C; --color-profit: #4D9BFF; --color-loss: #FF5A67;
         }
@@ -103,7 +103,6 @@
         .cat-tab { flex: 1; padding: 8px; text-align: center; font-size: 0.85rem; font-weight: 700; background: transparent; color: var(--color-text-muted); border: none; border-radius: 8px; }
         .cat-tab.active { background: var(--color-white); color: var(--color-black); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
         
-        /* ★ 납품 / 발주 탭 컬러 구분 */
         .type-tabs { display: flex; margin-bottom: 16px; gap: 8px; }
         .type-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.9rem; font-weight: 800; background: var(--color-white); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 10px; transition: all 0.2s;}
         .type-tab[data-type="delivery"].active { border-color: var(--color-profit); color: var(--color-white); background: var(--color-profit); }
@@ -124,7 +123,7 @@
         .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 6px; }
         .size-item { display: flex; flex-direction: column; align-items: center; background: var(--color-white); border-radius: 8px; padding: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
         .size-item span { font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; color: var(--color-text-muted); }
-        .size-item input { padding: 6px; text-align: center; font-size: 0.9rem; font-weight: 700; width: 100%; border-radius: 6px; background: var(--color-light-gray); border: none; }
+        .size-item input { padding: 6px; text-align: center; font-size: 0.9rem; font-weight: 700; width: 100%; border-radius: 4px; background: var(--color-light-gray); border: none; }
         .size-item input:focus { background: var(--color-white); border: 1px solid var(--color-black); }
 
         .submit-btn { width: 100%; padding: 14px; background: var(--color-black); color: var(--color-bg); border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 800; margin-top: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -139,7 +138,6 @@
         .summary-item span { font-size: 0.7rem; color: rgba(255,255,255,0.7); font-weight: 600;}
         .summary-item strong { font-size: 0.95rem; color: #fff; font-weight: 800;}
 
-        /* 컴팩트 리스트 카드 */
         .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
         .rc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .rc-left, .rc-right { display: flex; align-items: center; gap: 6px; }
@@ -172,9 +170,9 @@
         .text-loss { color: var(--color-loss); font-weight: 800; }
 
         .profit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 14px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 14px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .profit-card.full { grid-column: 1 / -1; background: var(--color-black); border: none; }
-        .profit-card span { display: block; font-size: 0.7rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 4px; }
+        .profit-card span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 4px; }
         .profit-card.full span { color: rgba(255,255,255,0.7); }
         .profit-card strong { font-size: 1.1rem; font-weight: 800; color: var(--color-text); }
         .profit-card.full strong { color: #fff; font-size: 1.2rem; }
@@ -187,14 +185,14 @@
         .modal-close { background: var(--color-bg); border: none; font-size: 1rem; color: var(--color-text-muted); width: 28px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
         
         .settings-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border); }
-        .settings-title { font-weight: 800; margin-bottom: 8px; color: var(--color-black); font-size: 0.9rem; }
-        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
-        .setting-input { width: 90px; padding: 8px; text-align: right; background: var(--color-bg); }
+        .settings-title { font-weight: 800; margin-bottom: 10px; color: var(--color-black); font-size: 0.95rem; }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
+        .setting-input { width: 100px; padding: 8px; text-align: right; background: var(--color-bg); }
         .btn-action { background: var(--color-bg); border: none; color: var(--color-text); padding: 12px; border-radius: 10px; width: 100%; font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
         .btn-action.primary { background: var(--color-black); color: var(--color-white); }
         
-        .empty-state { text-align: center; padding: 50px 20px; color: var(--color-text-muted); font-size: 0.85rem; font-weight: 600; background: var(--color-white); border-radius: 12px; border: 1px dashed var(--color-border); }
-        input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-black); cursor: pointer; }
+        .empty-state { text-align: center; padding: 50px 20px; color: var(--color-text-muted); font-size: 0.9rem; font-weight: 600; background: var(--color-white); border-radius: 10px; border: 1px dashed var(--color-border); }
+        input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--color-black); cursor: pointer; }
         
         #loadingText { text-align: center; padding: 40px; color: var(--color-text-muted); display: none; font-weight: 600; font-size: 0.85rem; }
     </style>
@@ -254,6 +252,7 @@
         <div id="loadingText">데이터 동기화 중...</div>
 
         <div id="printHiddenElements">
+            
             <div id="inputFormSection" class="form-card" style="display:none;">
                 <div class="category-tabs">
                     <button class="cat-tab active" data-cat="uniform">유니폼</button>
@@ -294,7 +293,6 @@
                             <div class="input-group">
                                 <label for="costInput">1개당 원가</label>
                                 <input type="number" id="costInput" placeholder="입력/자동">
-                                <div id="learnedPriceHelper" class="helper-text">최신 단가 적용됨</div>
                             </div>
                         </div>
                         <div class="input-row" id="multiCostRow" style="display: none;">
@@ -307,6 +305,8 @@
                                 <input type="number" id="costInputLarge" placeholder="대형 원가">
                             </div>
                         </div>
+                        <div id="learnedPriceHelper" class="helper-text" style="margin-top:-10px; margin-bottom:12px;">최신 단가 적용됨</div>
+
                         <div class="input-group">
                             <label id="deliveryPriceLabel">총 청구액</label>
                             <input type="text" id="deliveryPriceInput" readonly placeholder="자동 계산">
@@ -314,9 +314,9 @@
                     </div>
 
                     <div id="orderFields" style="display: none;">
-                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:12px; background:var(--color-bg); padding:10px 12px; border-radius:10px;">
+                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:12px; background:var(--color-bg); padding:10px 14px; border-radius:10px;">
                             <input type="checkbox" id="vatCheck" checked>
-                            <label for="vatCheck" style="margin:0; font-size:0.85rem; cursor:pointer;">부가세 10% 포함</label>
+                            <label for="vatCheck" style="margin:0; font-size:0.9rem; cursor:pointer;">부가세 10% 포함</label>
                         </div>
                         <div class="input-row">
                             <div class="input-group">
@@ -340,8 +340,8 @@
 
             <div id="inventorySection" style="display:none;">
                 <div id="inventoryContent"></div>
-                <form id="editInventoryForm" style="display:none; margin-top:16px; background:var(--color-white); padding:16px; border-radius:12px; border:1px solid var(--color-border);">
-                    <div style="font-size:0.8rem; font-weight:700; margin-bottom:12px; color:var(--color-text);">※ 변동이 있는 칸만 고쳐주세요. (조정 기록 생성)</div>
+                <form id="editInventoryForm" style="display:none; margin-top:20px; background:var(--color-white); padding:16px; border-radius:12px; border:1px solid var(--color-black);">
+                    <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px;">※ 변동이 있는 칸만 고쳐주세요. (조정 기록 생성)</div>
                     <button type="submit" class="btn-action primary">수정 완료</button>
                     <button type="button" class="btn-action" onclick="cancelEditInventory()">취소</button>
                 </form>
@@ -406,7 +406,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ★★★ 여기에 본인의 Firebase 설정값을 넣어주세요! ★★★
+        // ★★★ 여기에 본인의 Firebase 설정값을 다시 꼭 넣어주세요! ★★★
 const firebaseConfig = {
   apiKey: "AIzaSyANj0f_hc1zGXTnTM4TZt-kQTS-dY0jFPY",
   authDomain: "katsu-hesed-minutes.firebaseapp.com",
@@ -513,7 +513,7 @@ const firebaseConfig = {
             } else if (currentView.type === 'monthSummary') {
                 const [y, m] = currentView.val.split('-'); viewTitleText.innerText = `🗓️ ${y}년 ${parseInt(m)}월 요약`; monthSummarySection.style.display = 'block'; renderMonthSummaryTable(currentView.val);
             } else if (currentView.type === 'search') {
-                viewTitleText.innerText = `🔎 '${currentView.val}' 검색`; recordListArea.style.display = 'block';
+                viewTitleText.innerText = `🔎 '${currentView.val}' 검색 결과`; recordListArea.style.display = 'block';
                 const filtered = allRecords.filter(r => r.partner && r.partner.includes(currentView.val));
                 const summary = {};
                 filtered.forEach(r => { if (r.type === 'delivery') { if (!summary[r.item]) summary[r.item] = 0; summary[r.item] += Number(r.totalQty); } });
@@ -564,7 +564,7 @@ const firebaseConfig = {
             if(window.innerWidth < 768) { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('open'); }
         });
 
-        // --- 재고 ---
+        // --- 재고 (임계점 로직 포함) ---
         function getInventoryStock() {
             const stock = {};
             for (let cat in inventoryData) for (let item in inventoryData[cat]) { stock[item] = {}; inventoryData[cat][item].forEach(size => { stock[item][size] = 0; }); }
@@ -587,7 +587,6 @@ const firebaseConfig = {
                 for (let item in inventoryData[cat]) {
                     inventoryData[cat][item].forEach((size, index) => {
                         const qty = stock[item][size];
-                        // ★ 임계점 로직
                         const threshold = (item === '노루지') ? 2000 : 5;
                         const qtyClass = qty <= threshold ? 'text-loss' : '';
                         html += `<tr>`; if (index === 0) html += `<td rowspan="${inventoryData[cat][item].length}" class="row-header">${item}</td>`;
@@ -627,7 +626,6 @@ const firebaseConfig = {
             try { for(let adj of adjustments) await addDoc(collection(db, "katsu_inventory"), adj); alert("조정 완료"); cancelEditInventory(); } catch(err) { alert("조정 오류"); }
         });
 
-        // --- 손익 ---
         function renderProfitTable() {
             const iProf = {}; for(let cat in inventoryData) for(let item in inventoryData[cat]) iProf[item] = { delivery:0, order:0 };
             let tOrder = 0; let tDeliv = 0; const gYear = {};
@@ -640,14 +638,14 @@ const firebaseConfig = {
             });
 
             const tProf = tDeliv - tOrder;
-            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:20px; border-radius:14px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.8rem; color:#aaa; margin-bottom:6px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:1.6rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:10px; font-size:0.9rem; font-weight:800;">품목별 누적 손익</h3><div class="profit-grid">`;
+            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:20px; border-radius:14px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.8rem; color:#aaa; margin-bottom:6px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:1.6rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:10px; font-size:0.95rem; font-weight:800;">품목별 누적 손익</h3><div class="profit-grid">`;
             for(let item in iProf) { const p = iProf[item].delivery - iProf[item].order; html += `<div class="profit-card"><span>${item}</span><strong class="${p>=0?'text-profit':'text-loss'}">${p>0?'+':''}${p.toLocaleString()}</strong></div>`; }
             html += `</div>`;
             Object.keys(gYear).sort().reverse().forEach((y, idx) => {
                 let rows = ''; let yO = 0, yD = 0;
                 Object.keys(gYear[y]).sort().reverse().forEach(m => { yO += gYear[y][m].order; yD += gYear[y][m].delivery; const p = gYear[y][m].delivery - gYear[y][m].order; rows += `<tr><td>${parseInt(m)}월</td><td>${gYear[y][m].delivery.toLocaleString()}</td><td>${gYear[y][m].order.toLocaleString()}</td><td class="${p>=0?'text-profit':'text-loss'}">${p.toLocaleString()}</td></tr>`; });
                 const yp = yD - yO;
-                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:12px; border:1px solid var(--color-border); border-radius:10px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:12px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-white); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
+                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:12px; border:1px solid var(--color-border); border-radius:10px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:12px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-bg); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
             });
             profitContent.innerHTML = html;
         }
@@ -691,19 +689,15 @@ const firebaseConfig = {
             sizeGrid.innerHTML = inventoryData[currentCat][item].map(s => `<div class="size-item"><span>${s}</span><input type="number" class="size-input" data-size="${s}" min="0" placeholder="0"></div>`).join('');
             document.querySelectorAll('.size-input').forEach(i => i.addEventListener('input', calculateTotal)); 
             
-            // ★ 후카박스 소형/대형 원가 분리 UI 토글
+            // ★ 후카박스 원가 입력 폼 토글
             if (item === '후카박스' && currentType === 'delivery') {
                 document.getElementById('singleCostRow').style.display = 'none';
                 document.getElementById('multiCostRow').style.display = 'grid';
-                costInput.required = false;
-                document.getElementById('costInputSmall').required = true;
-                document.getElementById('costInputLarge').required = true;
+                costInput.required = false; document.getElementById('costInputSmall').required = true; document.getElementById('costInputLarge').required = true;
             } else if (currentType === 'delivery') {
                 document.getElementById('singleCostRow').style.display = 'grid';
                 document.getElementById('multiCostRow').style.display = 'none';
-                costInput.required = true;
-                document.getElementById('costInputSmall').required = false;
-                document.getElementById('costInputLarge').required = false;
+                costInput.required = true; document.getElementById('costInputSmall').required = false; document.getElementById('costInputLarge').required = false;
             }
             calculateTotal(); checkLearnedPrice();
         }
@@ -713,23 +707,18 @@ const firebaseConfig = {
         
         function calculateTotal() {
             currentTotalQty = 0; let totalDelivPrice = 0;
-            const cost = parseInt(costInput.value) || 0;
-            const item = itemSelect.value;
-            const fp = getFranchisePrices();
-            const sel = partnerSelect.options[partnerSelect.selectedIndex];
-            const isDirect = sel ? sel.dataset.type === 'direct' : false;
+            const cost = parseInt(costInput.value) || 0; const item = itemSelect.value; const fp = getFranchisePrices();
+            const sel = partnerSelect.options[partnerSelect.selectedIndex]; const isDirect = sel ? sel.dataset.type === 'direct' : false;
 
             document.querySelectorAll('.size-input').forEach(input => {
-                const q = parseInt(input.value) || 0;
-                currentTotalQty += q;
+                const q = parseInt(input.value) || 0; currentTotalQty += q;
                 if (currentType === 'delivery' && q > 0) {
                     if (item === '후카박스') {
                         const cS = parseInt(document.getElementById('costInputSmall').value) || 0;
                         const cL = parseInt(document.getElementById('costInputLarge').value) || 0;
                         const baseCost = input.dataset.size === '소형' ? cS : cL;
-                        if (isDirect) {
-                            totalDelivPrice += baseCost * q;
-                        } else {
+                        if (isDirect) { totalDelivPrice += baseCost * q; } 
+                        else {
                             const fPrice = fp[`후카박스_${input.dataset.size}`] ? parseInt(fp[`후카박스_${input.dataset.size}`]) : (baseCost * 2);
                             totalDelivPrice += fPrice * q;
                         }
@@ -743,9 +732,7 @@ const firebaseConfig = {
                 }
             });
             totalQtyDisplay.innerText = currentTotalQty;
-
             if (currentType === 'delivery' && currentTotalQty > 0) {
-                // 후카박스 단가 체크 혹은 일반 단가 체크
                 if (item === '후카박스' || cost > 0) {
                     deliveryPriceLabel.innerText = isDirect ? '청구액 (직영)' : '청구액 (가맹)';
                     deliveryPriceInput.value = totalDelivPrice.toLocaleString() + ' 원';
@@ -757,33 +744,47 @@ const firebaseConfig = {
         }
         
         costInput.addEventListener('input', calculateTotal); totalOrderAmount.addEventListener('input', calculateTotal);
-        
         function toggleMode() {
             renderPartnerSelect();
             if (currentType === 'delivery') { 
-                document.getElementById('deliveryFields').style.display = 'block'; 
-                document.getElementById('orderFields').style.display = 'none'; 
+                document.getElementById('deliveryFields').style.display = 'block'; document.getElementById('orderFields').style.display = 'none'; 
                 document.getElementById('totalOrderAmount').required = false; 
-                renderSizeGrid(); // 후카박스 분리 대응 재렌더링
-                checkLearnedPrice(); 
+                renderSizeGrid(); checkLearnedPrice(); 
             } else { 
-                document.getElementById('deliveryFields').style.display = 'none'; 
-                document.getElementById('orderFields').style.display = 'block'; 
+                document.getElementById('deliveryFields').style.display = 'none'; document.getElementById('orderFields').style.display = 'block'; 
                 costInput.required = false; document.getElementById('costInputSmall').required = false; document.getElementById('costInputLarge').required = false;
                 document.getElementById('totalOrderAmount').required = true; learnedPriceHelper.style.display = 'none'; 
             }
             calculateTotal();
         }
+
+        // ★ 후카박스 소형/대형 단가 자동 불러오기 (최신 납품 기록 기준)
         function checkLearnedPrice() {
             if (currentType !== 'delivery') return;
-            const latest = allRecords.find(r => r.type === 'order' && r.item === itemSelect.value);
-            if (latest && latest.unitPrice) { costInput.value = latest.unitPrice; learnedPriceHelper.style.display = 'block'; } else { costInput.value = ''; learnedPriceHelper.style.display = 'none'; }
+            const item = itemSelect.value;
+            if (item === '후카박스') {
+                const latestDeliv = allRecords.find(r => r.type === 'delivery' && r.item === '후카박스');
+                if (latestDeliv && (latestDeliv.costSmall || latestDeliv.costLarge)) { 
+                    document.getElementById('costInputSmall').value = latestDeliv.costSmall || ''; 
+                    document.getElementById('costInputLarge').value = latestDeliv.costLarge || ''; 
+                    learnedPriceHelper.innerText = '최신 납품 원가 적용됨'; learnedPriceHelper.style.display = 'block'; 
+                } else { 
+                    document.getElementById('costInputSmall').value = ''; document.getElementById('costInputLarge').value = ''; 
+                    learnedPriceHelper.style.display = 'none'; 
+                }
+            } else {
+                const latest = allRecords.find(r => r.type === 'order' && r.item === item);
+                if (latest && latest.unitPrice) { costInput.value = latest.unitPrice; learnedPriceHelper.innerText = '최신 발주 단가 적용됨'; learnedPriceHelper.style.display = 'block'; } 
+                else { costInput.value = ''; learnedPriceHelper.style.display = 'none'; }
+            }
             calculateTotal();
         }
+
         document.querySelectorAll('.cat-tab').forEach(t => t.addEventListener('click', (e) => { document.querySelectorAll('.cat-tab').forEach(el => el.classList.remove('active')); e.target.classList.add('active'); currentCat = e.target.dataset.cat; updateItemOptions(); }));
         document.querySelectorAll('.type-tab').forEach(t => t.addEventListener('click', (e) => { document.querySelectorAll('.type-tab').forEach(el => el.classList.remove('active')); e.target.classList.add('active'); currentType = e.target.dataset.type; toggleMode(); }));
         itemSelect.addEventListener('change', renderSizeGrid);
 
+        // ★ 저장 (초기화 방지 및 후카박스 분리 저장)
         document.getElementById('recordForm').addEventListener('submit', async (e) => {
             e.preventDefault(); if (currentTotalQty <= 0) return alert("수량을 입력하세요.");
             const sizesData = []; document.querySelectorAll('.size-input').forEach(i => { const q = parseInt(i.value); if (q > 0) sizesData.push({ size: i.dataset.size, qty: q }); });
@@ -791,10 +792,8 @@ const firebaseConfig = {
             
             if (currentType === 'delivery') {
                 const sel = partnerSelect.options[partnerSelect.selectedIndex]; record.isDirect = sel ? sel.dataset.type === 'direct' : false;
-                let totPrice = 0; const fp = getFranchisePrices();
-                let dPriceText = '';
+                let totPrice = 0; const fp = getFranchisePrices(); let dPriceText = '';
 
-                // ★ 후카박스와 일반품목 저장 분리
                 if (record.item === '후카박스') {
                     record.costSmall = document.getElementById('costInputSmall').value;
                     record.costLarge = document.getElementById('costInputLarge').value;
@@ -814,12 +813,13 @@ const firebaseConfig = {
                     dPriceText = (record.isDirect ? baseC : fpC).toLocaleString();
                 }
 
-                record.deliveryUnitPrice = dPriceText; // 실제 숫자로 저장 완료
-                record.totalDeliveryPrice = totPrice;
+                record.deliveryUnitPrice = dPriceText; record.totalDeliveryPrice = totPrice;
             } else { record.vat = vatCheck.checked ? '부가세 포함' : '별도'; record.totalAmount = totalOrderAmount.value; record.unitPrice = Math.round(record.totalAmount / currentTotalQty); }
             
-            try { await addDoc(collection(db, "katsu_inventory"), record); document.querySelectorAll('.size-input').forEach(i => i.value = ''); costInput.value = ''; document.getElementById('costInputSmall').value = ''; document.getElementById('costInputLarge').value = ''; deliveryPriceInput.value = ''; totalOrderAmount.value = ''; calcUnitPrice.value = ''; totalQtyDisplay.innerText = '0'; currentTotalQty = 0; alert("저장 완료"); } 
-            catch(e) { alert("저장 오류"); }
+            try { 
+                await addDoc(collection(db, "katsu_inventory"), record); 
+                alert("저장 완료"); 
+            } catch(e) { alert("저장 오류"); }
         });
 
         window.closeModal = function(id) { document.getElementById(id).style.display = 'none'; }
@@ -859,11 +859,9 @@ const firebaseConfig = {
             for(let cat in inventoryData) {
                 for(let item in inventoryData[cat]) {
                     if (item === '후카박스') {
-                        html += `<div class="setting-row"><span>${item} (소형)</span><input type="number" id="price_후카박스_소형" class="setting-input" value="${fp['후카박스_소형']||''}" placeholder="2배수"></div>`;
-                        html += `<div class="setting-row"><span>${item} (대형)</span><input type="number" id="price_후카박스_대형" class="setting-input" value="${fp['후카박스_대형']||''}" placeholder="2배수"></div>`;
-                    } else {
-                        html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="2배수"></div>`;
-                    }
+                        html += `<div class="setting-row"><span>${item} (소형)</span><input type="number" id="price_후카박스_소형" class="setting-input" value="${fp['후카박스_소형']||''}" placeholder="기본 2배수"></div>`;
+                        html += `<div class="setting-row"><span>${item} (대형)</span><input type="number" id="price_후카박스_대형" class="setting-input" value="${fp['후카박스_대형']||''}" placeholder="기본 2배수"></div>`;
+                    } else { html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="기본 2배수"></div>`; }
                 }
             }
             document.getElementById('franchisePriceInputs').innerHTML = html; document.getElementById('settingsModal').style.display = 'flex';
@@ -876,9 +874,7 @@ const firebaseConfig = {
                     if(item === '후카박스') {
                         const v1 = document.getElementById(`price_후카박스_소형`).value; if(v1) fp['후카박스_소형'] = v1;
                         const v2 = document.getElementById(`price_후카박스_대형`).value; if(v2) fp['후카박스_대형'] = v2;
-                    } else {
-                        const v = document.getElementById(`price_${item}`).value; if(v) fp[item] = v; 
-                    }
+                    } else { const v = document.getElementById(`price_${item}`).value; if(v) fp[item] = v; }
                 }
             }
             await setDoc(doc(db, "katsu_settings", "global"), { franchisePrices: fp }, { merge: true }); alert('저장되었습니다.'); 
@@ -995,7 +991,6 @@ const firebaseConfig = {
                 let pHTML = '';
                 if (isD) {
                     let priceLabelText = data.isDirect ? '직영 원가' : '가맹 납품가';
-                    // ★ 문자열로 저장된 deliveryUnitPrice 그대로 출력 (끝에 '원'을 붙임)
                     let uPriceText = data.deliveryUnitPrice + '원';
                     pHTML = `<div class="rc-price-info">단가 ${uPriceText} <span style="font-size:0.7rem;">(${priceLabelText})</span></div><div class="rc-total-price" style="color:var(--color-profit);">${Number(data.totalDeliveryPrice).toLocaleString()}원</div>`;
                 } else { pHTML = `<div class="rc-price-info">단가 ${Number(data.unitPrice).toLocaleString()}원</div><div class="rc-total-price">${Number(data.totalAmount).toLocaleString()}원 <span style="font-size:0.7rem; font-weight:normal;">${data.vat?'('+data.vat+')':''}</span></div>`; }
