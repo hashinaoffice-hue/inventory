@@ -35,10 +35,9 @@
             --color-light-gray: #2A2A2A; --color-profit: #4DABF7; --color-loss: #FF6B6B;
         }
 
-        * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; letter-spacing: -0.01em; }
-        body { background-color: var(--color-bg); color: var(--color-text); -webkit-font-smoothing: antialiased; padding-bottom: 60px; overflow-x: hidden; transition: background-color 0.2s, color 0.2s; }
+        * { box-sizing: border-box; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; letter-spacing: -0.02em; }
+        body { background-color: var(--color-bg); color: var(--color-text); -webkit-font-smoothing: antialiased; padding-bottom: 60px; overflow-x: hidden; }
 
-        /* 인쇄 전용 스타일 */
         @media print {
             body { background: #fff !important; color: #000 !important; }
             header, #sidebar, #sidebarOverlay, #inputFormSection, .view-title, #printHiddenElements, .modal-overlay, #loginScreen { display: none !important; }
@@ -48,123 +47,127 @@
             .pdf-table-container { page-break-inside: avoid; margin-bottom: 24px; }
         }
 
-        button { cursor: pointer; transition: all 0.2s; }
-        input, select { background-color: var(--color-white); color: var(--color-text); border: 1px solid var(--color-border); font-size: 15px; padding: 12px 14px; border-radius: 8px; width: 100%; transition: border-color 0.2s, background-color 0.2s, color 0.2s; }
+        button { cursor: pointer; transition: opacity 0.2s; }
+        /* 모바일 확대 방지 및 슬림한 폼을 위한 16px */
+        input, select { background-color: var(--color-white); color: var(--color-text); border: 1px solid var(--color-border); font-size: 16px; padding: 10px 12px; border-radius: 8px; width: 100%; transition: border-color 0.2s; }
         input:focus, select:focus { outline: none; border-color: var(--color-black); box-shadow: 0 0 0 2px rgba(26, 28, 30, 0.1); }
-        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23868E96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 36px; }
+        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23868E96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 16px; padding-right: 32px; }
 
-        /* 헤더 */
-        header { background-color: var(--color-white); border-bottom: 1px solid var(--color-border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        header { background-color: var(--color-white); border-bottom: 1px solid var(--color-border); padding: 12px 16px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .header-left { display: flex; align-items: center; }
-        .menu-btn { background: none; border: none; font-size: 1.6rem; color: var(--color-text); margin-right: 14px; padding: 0; }
-        header h1 { font-size: 1.15rem; font-weight: 800; color: var(--color-text); margin: 0; }
-        .logout-btn { background: none; border: 1px solid var(--color-border); color: var(--color-text); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; }
+        .menu-btn { background: none; border: none; font-size: 1.5rem; color: var(--color-black); margin-right: 12px; padding: 0; }
+        header h1 { font-size: 1.1rem; font-weight: 800; color: var(--color-black); margin: 0; }
+        .logout-btn { background: none; border: 1px solid var(--color-border); color: var(--color-text); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; }
 
-        /* 사이드바 */
-        .sidebar { width: var(--sidebar-width); background-color: var(--color-white); height: 100vh; position: fixed; top: 0; left: calc(-1 * var(--sidebar-width)); padding-top: 58px; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 90; border-right: 1px solid var(--color-border); display: flex; flex-direction: column; box-shadow: 8px 0 24px rgba(0,0,0,0.04); }
+        .sidebar { width: var(--sidebar-width); background-color: var(--color-white); height: 100vh; position: fixed; top: 0; left: calc(-1 * var(--sidebar-width)); padding-top: 52px; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 90; border-right: 1px solid var(--color-border); display: flex; flex-direction: column; box-shadow: 8px 0 24px rgba(0,0,0,0.04); }
         .sidebar.open { left: 0; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 80; backdrop-filter: blur(2px); }
         .sidebar-overlay.open { display: block; }
         .sidebar-scroll { flex: 1; overflow-y: auto; padding-bottom: 20px; }
-        .sidebar-section { padding: 24px 20px 8px; font-weight: 700; font-size: 0.85rem; color: var(--color-text-muted); }
+        .sidebar-section { padding: 20px 16px 8px; font-weight: 700; font-size: 0.85rem; color: var(--color-text-muted); }
         .item-list { list-style: none; }
-        .sidebar-item { padding: 12px 20px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: space-between; color: var(--color-text); }
+        .sidebar-item { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; color: var(--color-text); }
         .sidebar-item:hover { background-color: var(--color-light-gray); }
         .sidebar-item.active { background-color: var(--color-black); color: var(--color-bg); font-weight: 700; border-radius: 0 8px 8px 0; margin-right: 12px; }
         
-        .year-menu-header { padding: 14px 20px; font-weight: 700; font-size:1rem; cursor: pointer; display:flex; justify-content: space-between; color: var(--color-text); }
+        .year-menu-header { padding: 12px 16px; font-weight: 700; font-size:0.95rem; cursor: pointer; display:flex; justify-content: space-between; color: var(--color-text); }
         .year-menu-header:hover { background-color: var(--color-light-gray); }
         .month-list { display: none; background: var(--color-bg); }
         .year-group.open .month-list { display: block; }
-        .month-item { padding: 12px 20px 12px 40px; font-size: 0.95rem; font-weight: 500; cursor: pointer; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
+        .month-item { padding: 10px 16px 10px 36px; font-size: 0.9rem; font-weight: 500; cursor: pointer; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
         .month-item:hover { background-color: var(--color-border); }
         .month-item.active { font-weight: 800; color: var(--color-profit); }
         .sidebar-bottom { padding: 16px; border-top: 1px solid var(--color-border); background: var(--color-bg); }
-        .search-box { display: flex; gap: 8px; margin-bottom: 12px; }
-        .search-box input { flex: 1; font-size: 0.95rem; padding: 10px 12px; }
-        .search-box button { background: var(--color-black); color: var(--color-bg); border: none; padding: 0 14px; border-radius: 8px; font-size: 1rem; }
-        .btn-settings { width: 100%; padding: 12px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; font-weight: 700; font-size: 0.95rem; color: var(--color-text); }
+        .search-box { display: flex; gap: 6px; margin-bottom: 12px; }
+        .search-box input { flex: 1; font-size: 0.9rem; padding: 10px; }
+        .search-box button { background: var(--color-black); color: var(--color-bg); border: none; padding: 0 12px; border-radius: 8px; font-size: 1rem; }
+        .btn-settings { width: 100%; padding: 10px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; font-weight: 700; font-size: 0.9rem; color: var(--color-text); }
 
-        /* 폼 & UI */
-        .container { max-width: 640px; margin: 0 auto; padding: 16px; display: none; }
-        .view-title { font-size: 1.25rem; font-weight: 800; border-bottom: 2px solid var(--color-black); padding-bottom: 10px; margin-bottom: 20px; display:flex; justify-content: space-between; align-items:flex-end; color: var(--color-text); }
-        .form-card { background: var(--color-white); padding: 20px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); border: 1px solid var(--color-border); }
-        .category-tabs { display: flex; margin-bottom: 16px; background: var(--color-light-gray); border-radius: 8px; padding: 4px; }
-        .cat-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.95rem; font-weight: 700; background: transparent; color: var(--color-text-muted); border: none; border-radius: 6px; }
-        .cat-tab.active { background: var(--color-white); color: var(--color-text); box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-        .type-tabs { display: flex; margin-bottom: 20px; gap: 8px; }
-        .type-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.9rem; font-weight: 700; background: var(--color-white); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 8px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 12px; display: none; }
+        .view-title { font-size: 1.15rem; font-weight: 800; border-bottom: 2px solid var(--color-black); padding-bottom: 8px; margin-bottom: 16px; display:flex; justify-content: space-between; align-items:flex-end; color: var(--color-text); }
+
+        /* 폼 카드 슬림화 */
+        .form-card { background: var(--color-white); padding: 16px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid var(--color-border); }
+        .category-tabs { display: flex; margin-bottom: 14px; background: var(--color-light-gray); border-radius: 8px; padding: 4px; }
+        .cat-tab { flex: 1; padding: 8px; text-align: center; font-size: 0.9rem; font-weight: 700; background: transparent; color: var(--color-text-muted); border: none; border-radius: 6px; }
+        .cat-tab.active { background: var(--color-white); color: var(--color-text); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .type-tabs { display: flex; margin-bottom: 16px; gap: 8px; }
+        .type-tab { flex: 1; padding: 8px; text-align: center; font-size: 0.85rem; font-weight: 700; background: var(--color-white); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 8px; }
         .type-tab.active { border-color: var(--color-black); color: var(--color-text); background: var(--color-bg); }
-        .input-group { margin-bottom: 16px; }
-        .input-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-end; }
-        .input-row .input-group { flex: 1; margin-bottom: 0; }
-        label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--color-text); }
-        .manage-link { font-size: 0.8rem; color: var(--color-profit); text-decoration: underline; cursor: pointer; font-weight: 600; }
+
+        /* 모바일 UI 밀림 방지 그리드 */
+        .input-group { margin-bottom: 12px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; align-items: start; }
+        .input-row .input-group { margin-bottom: 0; }
+        
+        label { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; color: var(--color-text); }
+        .manage-link { font-size: 0.75rem; color: var(--color-profit); text-decoration: underline; cursor: pointer; font-weight: 600; }
         input[readonly] { background-color: var(--color-light-gray); color: var(--color-text-muted); font-weight: 600; }
         
-        .size-grid-container { background: var(--color-light-gray); padding: 16px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--color-border); }
-        .size-grid-header { font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
-        .total-qty-badge { background: var(--color-black); color: var(--color-bg); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
-        .size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .size-item { display: flex; flex-direction: column; align-items: center; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; padding: 8px; }
-        .size-item span { font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; color: var(--color-text-muted); }
-        .size-item input { padding: 6px; text-align: center; font-size: 1rem; font-weight: 700; width: 100%; border-radius: 6px; }
-        .submit-btn { width: 100%; padding: 14px; background: var(--color-black); color: var(--color-bg); border: none; border-radius: 8px; font-size: 1rem; font-weight: 800; margin-top: 8px; }
-        .helper-text { font-size: 0.75rem; color: var(--color-profit); margin-top: 6px; display: none; font-weight: 600; }
+        .size-grid-container { background: var(--color-light-gray); padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--color-border); }
+        .size-grid-header { font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
+        .total-qty-badge { background: var(--color-black); color: var(--color-bg); padding: 4px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: bold; }
+        .size-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); gap: 8px; }
+        .size-item { display: flex; flex-direction: column; align-items: center; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 6px; padding: 6px; }
+        .size-item span { font-size: 0.75rem; font-weight: 700; margin-bottom: 4px; color: var(--color-text-muted); }
+        .size-item input { padding: 6px; text-align: center; font-size: 0.95rem; font-weight: 700; width: 100%; border-radius: 4px; }
 
-        /* 기록 리스트 & 카드 */
-        #searchSummaryArea { display: none; margin-bottom: 24px; }
-        .search-summary-box { background: var(--color-white); border: 2px solid var(--color-black); border-radius: 12px; padding: 16px; }
-        .search-summary-box h4 { margin: 0 0 12px 0; font-size: 0.95rem; color: var(--color-text); }
-        .search-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
-        .summary-item { background: var(--color-bg); padding: 10px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--color-border); }
-        .summary-item span { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;}
-        .summary-item strong { font-size: 1.1rem; color: var(--color-profit); font-weight: 800;}
-        
-        .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); transition: all 0.2s; }
-        .rc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .rc-left, .rc-right { display: flex; align-items: center; gap: 8px; }
-        .rc-badge { font-size: 0.7rem; padding: 4px 6px; border-radius: 4px; font-weight: 800; line-height: 1; }
+        .submit-btn { width: 100%; padding: 12px; background-color: var(--color-black); color: var(--color-bg); border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 800; margin-top: 4px; }
+        .helper-text { font-size: 0.7rem; color: var(--color-profit); margin-top: 4px; display: none; font-weight: 600; }
+
+        #searchSummaryArea { display: none; margin-bottom: 16px; }
+        .search-summary-box { background: var(--color-white); border: 2px solid var(--color-black); border-radius: 10px; padding: 12px; }
+        .search-summary-box h4 { margin: 0 0 10px 0; font-size: 0.9rem; color: var(--color-text); }
+        .search-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+        .summary-item { background: var(--color-bg); padding: 8px; border-radius: 6px; text-align: center; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--color-border); }
+        .summary-item span { font-size: 0.7rem; color: var(--color-text-muted); font-weight: 600;}
+        .summary-item strong { font-size: 1rem; color: var(--color-profit); font-weight: 800;}
+
+        /* 컴팩트 리스트 카드 */
+        .record-card-compact { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+        .rc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .rc-left, .rc-right { display: flex; align-items: center; gap: 6px; }
+        .rc-badge { font-size: 0.65rem; padding: 3px 6px; border-radius: 4px; font-weight: 800; line-height: 1; }
         .bg-delivery { background: var(--color-profit); color: #fff; }
         .bg-order { background: var(--color-text-muted); color: #fff; }
         .bg-adjust { background: var(--color-black); color: var(--color-bg); }
-        .rc-title { font-weight: 800; font-size: 1.05rem; color: var(--color-text); }
-        .rc-date { font-size: 0.8rem; color: var(--color-text-muted); font-weight: 500; }
-        .btn-delete-icon { background: none; border: none; color: var(--color-text-muted); cursor: pointer; padding: 2px 6px; border-radius: 4px; font-size:0.8rem; font-weight:700;}
-        .rc-mid { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 12px; background: var(--color-light-gray); padding: 8px 12px; border-radius: 6px; }
+        .rc-title { font-weight: 800; font-size: 0.95rem; color: var(--color-text); }
+        .rc-date { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500; }
+        .btn-delete-icon { background: none; border: none; color: var(--color-text-muted); cursor: pointer; padding: 2px 4px; border-radius: 4px; font-size:0.8rem; font-weight:700;}
+        .rc-mid { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 8px; background: var(--color-light-gray); padding: 6px 10px; border-radius: 6px; }
         .rc-partner { font-weight: 800; color: var(--color-text); }
-        .rc-sizes { flex: 1; min-width:120px; line-height: 1.3;}
-        .rc-qty { font-weight: 600; background: var(--color-white); padding: 2px 6px; border-radius:4px; border:1px solid var(--color-border); color:var(--color-text); }
+        .rc-sizes { flex: 1; min-width:100px; line-height: 1.3;}
+        .rc-qty { font-weight: 600; background: var(--color-white); padding: 2px 4px; border-radius:4px; border:1px solid var(--color-border); color:var(--color-text); }
         .rc-bot { display: flex; justify-content: space-between; align-items: flex-end; }
-        .rc-price-info { font-size: 0.8rem; color: var(--color-text-muted); }
-        .rc-total-price { font-size: 1.15rem; font-weight: 800; color: var(--color-text); }
+        .rc-price-info { font-size: 0.75rem; color: var(--color-text-muted); }
+        .rc-total-price { font-size: 1rem; font-weight: 800; color: var(--color-text); }
 
-        .table-responsive { width: 100%; overflow-x: auto; background: var(--color-white); border-radius: 12px; border: 1px solid var(--color-border); margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .data-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 0.95rem; white-space: nowrap; color: var(--color-text); }
-        .data-table th, .data-table td { border-bottom: 1px solid var(--color-border); padding: 14px 12px; }
-        .data-table th { background-color: var(--color-light-gray); color: var(--color-text-muted); font-weight: 700; font-size: 0.85rem; }
+        .table-responsive { width: 100%; overflow-x: auto; background: var(--color-white); border-radius: 10px; border: 1px solid var(--color-border); margin-bottom: 20px; }
+        .data-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 0.85rem; white-space: nowrap; color: var(--color-text); }
+        .data-table th, .data-table td { border-bottom: 1px solid var(--color-border); padding: 10px 8px; }
+        .data-table th { background-color: var(--color-light-gray); color: var(--color-text-muted); font-weight: 700; font-size: 0.8rem; }
+        .data-table tbody tr:last-child td { border-bottom: none; }
         .row-header { font-weight: 800; color: var(--color-text); }
         .text-profit { color: var(--color-profit); font-weight: 800; }
         .text-loss { color: var(--color-loss); font-weight: 800; }
 
-        .profit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .profit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+        .profit-card { background: var(--color-white); border: 1px solid var(--color-border); padding: 12px; border-radius: 10px; text-align: center; }
         .profit-card.full { grid-column: 1 / -1; border: 1px solid var(--color-black); }
-        .profit-card span { display: block; font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 6px; }
-        .profit-card strong { font-size: 1.3rem; font-weight: 800; color: var(--color-text); }
+        .profit-card span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 4px; }
+        .profit-card strong { font-size: 1.1rem; font-weight: 800; color: var(--color-text); }
 
         /* 모달 */
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 16px; }
-        .modal-content { background: var(--color-white); width: 100%; max-width: 420px; border-radius: 16px; padding: 24px; max-height: 90vh; overflow-y:auto; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-weight: 800; font-size: 1.2rem; color: var(--color-black); }
-        .settings-section { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border); }
-        .settings-title { font-weight: 800; margin-bottom: 10px; color: var(--color-black); font-size: 1rem; }
-        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.95rem; font-weight: 600; color: var(--color-text); }
-        .setting-input { width: 110px; padding: 10px; text-align: right; }
-        .btn-action { background: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text); padding: 12px; border-radius: 8px; width: 100%; font-weight: 700; font-size: 0.95rem; margin-top: 8px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 16px; }
+        .modal-content { background: var(--color-white); width: 100%; max-width: 380px; border-radius: 12px; padding: 20px; max-height: 90vh; overflow-y:auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: 800; font-size: 1.1rem; color: var(--color-black); }
+        .settings-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border); }
+        .settings-title { font-weight: 800; margin-bottom: 10px; color: var(--color-black); font-size: 0.95rem; }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
+        .setting-input { width: 100px; padding: 8px; text-align: right; }
+        .btn-action { background: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text); padding: 10px; border-radius: 8px; width: 100%; font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
         .btn-action.primary { background: var(--color-black); color: var(--color-white); border: none; }
-        .empty-state { text-align: center; padding: 60px 20px; color: var(--color-text-muted); font-size: 1rem; font-weight: 600; background: var(--color-white); border-radius: 12px; border: 1px dashed var(--color-border); }
-        input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--color-black); cursor: pointer; }
+        .empty-state { text-align: center; padding: 50px 20px; color: var(--color-text-muted); font-size: 0.9rem; font-weight: 600; background: var(--color-white); border-radius: 10px; border: 1px dashed var(--color-border); }
         
         #loadingText { text-align: center; padding: 40px; color: var(--color-text-muted); display: none; font-weight: 600; }
         #loginScreen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--color-black); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px; }
@@ -211,11 +214,11 @@
         </div>
         <div class="sidebar-bottom">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="매장/업체명 검색...">
+                <input type="text" id="searchInput" placeholder="매장/업체 검색">
                 <button id="btnSearch">🔍</button>
             </div>
             <div class="settings-btn-wrap">
-                <button class="btn-settings" id="btnSettingsModal">⚙️ 설정 및 추출</button>
+                <button class="btn-settings" id="btnSettingsModal">⚙️ 설정 및 인쇄</button>
             </div>
         </div>
     </div>
@@ -263,7 +266,7 @@
                         <div class="input-row">
                             <div class="input-group">
                                 <label for="costInput">1개당 원가</label>
-                                <input type="number" id="costInput" placeholder="직접입력/자동" required>
+                                <input type="number" id="costInput" placeholder="입력/자동" required>
                                 <div id="learnedPriceHelper" class="helper-text">💡 최신 발주 단가 적용됨</div>
                             </div>
                             <div class="input-group">
@@ -273,8 +276,8 @@
                         </div>
                     </div>
                     <div id="orderFields" style="display: none;">
-                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:16px; background:var(--color-bg); padding:12px 14px; border-radius:8px; border:1px solid var(--color-border);">
-                            <input type="checkbox" id="vatCheck" checked>
+                        <div class="input-group" style="display:flex; align-items:center; gap:8px; margin-bottom:16px; background:var(--color-bg); padding:10px 12px; border-radius:8px; border:1px solid var(--color-border);">
+                            <input type="checkbox" id="vatCheck" checked style="width:20px; height:20px;">
                             <label for="vatCheck" style="margin:0; cursor:pointer;">부가세 10% 포함</label>
                         </div>
                         <div class="input-group">
@@ -292,25 +295,19 @@
 
             <div class="view-title" id="viewTitleContainer" style="display:none;">
                 <span id="viewTitleText">최근 전체 기록</span>
-                <button id="btnEditInventory" class="btn-action primary" style="width:auto; padding:6px 14px; margin:0; display:none; font-size:0.85rem;">재고 수정</button>
+                <button id="btnEditInventory" class="btn-action primary" style="width:auto; padding:6px 12px; margin:0; display:none; font-size:0.8rem;">재고 수정</button>
             </div>
 
             <div id="inventorySection" style="display:none;">
                 <div id="inventoryContent"></div>
                 <form id="editInventoryForm" style="display:none; margin-top:20px;">
-                    <button type="submit" class="btn-action primary" style="padding:14px;">수정사항 저장 (조정 기록 생성)</button>
+                    <button type="submit" class="btn-action primary" style="padding:12px;">수정사항 저장 (조정 기록 생성)</button>
                     <button type="button" class="btn-action" onclick="cancelEditInventory()">취소</button>
                 </form>
             </div>
 
-            <div id="profitSection" style="display:none;">
-                <div id="profitContent"></div>
-            </div>
-
-            <div id="monthSummarySection" style="display:none;">
-                <div id="monthSummaryContent"></div>
-            </div>
-
+            <div id="profitSection" style="display:none;"><div id="profitContent"></div></div>
+            <div id="monthSummarySection" style="display:none;"><div id="monthSummaryContent"></div></div>
             <div id="searchSummaryArea"></div>
             <div id="recordListArea" style="display:none;"><div id="recordList"></div></div>
         </div>
@@ -321,23 +318,26 @@
     <div id="settingsModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <span>⚙️ 시스템 설정</span>
+                <span>⚙️ 설정 및 인쇄</span>
                 <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
             </div>
+            
             <div class="settings-section">
                 <div class="settings-title">가맹점 납품가 개별 설정</div>
-                <div style="font-size:0.85rem; color:var(--color-text-muted); margin-bottom:12px; line-height:1.4;">미설정 시 원가의 2배가 적용됩니다.</div>
+                <div style="font-size:0.8rem; color:var(--color-text-muted); margin-bottom:12px; line-height:1.4;">미입력 시 원가의 2배가 적용됩니다.</div>
                 <div id="franchisePriceInputs"></div>
                 <button class="btn-action primary" onclick="saveFranchisePrices()">단가 저장</button>
             </div>
+
             <div class="settings-section">
-                <div class="settings-title">화면 및 추출</div>
-                <div class="setting-row"><span>🌙 다크 모드</span><input type="checkbox" id="darkModeToggle"></div>
+                <div class="settings-title">화면 및 월간 추출</div>
+                <div class="setting-row"><span>🌙 다크 모드</span><input type="checkbox" id="darkModeToggle" style="width:20px;height:20px;"></div>
                 <div class="setting-row" style="margin-top:16px;">
                     <select id="pdfMonthSelect" style="flex:1; margin-right:10px;"></select>
-                    <button class="btn-action primary" style="width:auto; margin:0; padding:12px 16px;" onclick="exportToPDF()">PDF 인쇄</button>
+                    <button class="btn-action primary" style="width:auto; margin:0; padding:10px 14px;" onclick="exportToPDF()">PDF 인쇄</button>
                 </div>
             </div>
+
             <div class="settings-section" style="border:none; margin-bottom:0; padding-bottom:0;">
                 <div class="settings-title">보안</div>
                 <button class="btn-action" onclick="changeAdminPassword()">비밀번호 변경</button>
@@ -365,10 +365,10 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ★★★ 여기에 본인의 Firebase 설정값을 넣어주세요! ★★★
+        // ★★★ 여기에 본인의 Firebase 설정값을 꼭 넣어주세요! ★★★
 const firebaseConfig = {
   apiKey: "AIzaSyANj0f_hc1zGXTnTM4TZt-kQTS-dY0jFPY",
   authDomain: "katsu-hesed-minutes.firebaseapp.com",
@@ -377,6 +377,7 @@ const firebaseConfig = {
   messagingSenderId: "421404505285",
   appId: "1:421404505285:web:f81978f763f3c6bb162cac"
 };
+
         // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
         const app = initializeApp(firebaseConfig);
@@ -428,6 +429,7 @@ const firebaseConfig = {
         const monthSummarySection = document.getElementById('monthSummarySection');
         const monthSummaryContent = document.getElementById('monthSummaryContent');
         const searchSummaryArea = document.getElementById('searchSummaryArea');
+        
         const itemSelect = document.getElementById('itemSelect');
         const partnerSelect = document.getElementById('partnerSelect');
         const partnerLabel = document.getElementById('partnerLabel');
@@ -469,7 +471,6 @@ const firebaseConfig = {
                 allRecords = [];
                 snapshot.forEach(doc => allRecords.push({ id: doc.id, ...doc.data() }));
                 
-                // 날짜 기준 정렬 보장
                 allRecords.sort((a, b) => {
                     if(a.date !== b.date) return new Date(b.date) - new Date(a.date);
                     return b.timestamp - a.timestamp;
@@ -555,6 +556,7 @@ const firebaseConfig = {
             if(window.innerWidth < 768) { sidebar.classList.remove('open'); sidebarOverlay.classList.remove('open'); }
         });
 
+        // --- 재고 (임계점 수정 적용) ---
         function getInventoryStock() {
             const stock = {};
             for (let cat in inventoryData) for (let item in inventoryData[cat]) { stock[item] = {}; inventoryData[cat][item].forEach(size => { stock[item][size] = 0; }); }
@@ -577,8 +579,12 @@ const firebaseConfig = {
                 for (let item in inventoryData[cat]) {
                     inventoryData[cat][item].forEach((size, index) => {
                         const qty = stock[item][size];
+                        // ★ 조건부 레드 표시 (노루지는 2000이하, 나머지는 5이하)
+                        const threshold = (item === '노루지') ? 2000 : 5;
+                        const qtyClass = qty <= threshold ? 'text-loss' : '';
+                        
                         html += `<tr>`; if (index === 0) html += `<td rowspan="${inventoryData[cat][item].length}" class="row-header">${item}</td>`;
-                        html += `<td>${size}</td><td class="${qty<0?'text-loss':(qty===0?'text-muted':'')}"><strong style="font-size:1.1rem;">${qty}</strong> 개</td></tr>`;
+                        html += `<td>${size}</td><td class="${qtyClass}"><strong style="font-size:1.1rem;">${qty}</strong> 개</td></tr>`;
                     });
                 }
             }
@@ -626,14 +632,14 @@ const firebaseConfig = {
             });
 
             const tProf = tDeliv - tOrder;
-            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:30px 20px; border-radius:16px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.95rem; color:#aaa; margin-bottom:10px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:2rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:12px; font-size:1rem;">품목별 순손익</h3><div class="profit-grid">`;
+            let html = `<div style="background:var(--color-black); color:var(--color-white); padding:20px; border-radius:12px; text-align:center; margin-bottom:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05);"><div style="font-size:0.9rem; color:#aaa; margin-bottom:8px; font-weight:700;">현재까지 총 순손익</div><div style="font-size:1.8rem; font-weight:800; color:${tProf>=0?'var(--color-profit)':'var(--color-loss)'};">${tProf>=0?'+':''}${tProf.toLocaleString()}원</div></div><h3 style="margin-bottom:10px; font-size:0.95rem;">품목별 순손익</h3><div class="profit-grid">`;
             for(let item in iProf) { const p = iProf[item].delivery - iProf[item].order; html += `<div class="profit-card"><span>${item}</span><strong class="${p>=0?'text-profit':'text-loss'}">${p>0?'+':''}${p.toLocaleString()}</strong></div>`; }
             html += `</div>`;
             Object.keys(gYear).sort().reverse().forEach((y, idx) => {
                 let rows = ''; let yO = 0, yD = 0;
                 Object.keys(gYear[y]).sort().reverse().forEach(m => { yO += gYear[y][m].order; yD += gYear[y][m].delivery; const p = gYear[y][m].delivery - gYear[y][m].order; rows += `<tr><td>${parseInt(m)}월</td><td>${gYear[y][m].delivery.toLocaleString()}</td><td>${gYear[y][m].order.toLocaleString()}</td><td class="${p>=0?'text-profit':'text-loss'}">${p.toLocaleString()}</td></tr>`; });
                 const yp = yD - yO;
-                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:16px; border:1px solid var(--color-border); border-radius:12px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:16px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-white); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
+                html += `<div class="year-accordion ${idx===0?'open':''}" style="margin-bottom:12px; border:1px solid var(--color-border); border-radius:8px; overflow:hidden;"><div class="year-header" onclick="this.parentElement.classList.toggle('open')" style="background:var(--color-white); padding:12px; display:flex; justify-content:space-between; font-weight:800; border-bottom:1px solid var(--color-border);"><span>🗓️ ${y}년 결산</span><span class="${yp>=0?'text-profit':'text-loss'}">${yp.toLocaleString()}원 ▼</span></div><div class="year-body" style="display:${idx===0?'block':'none'}; background:var(--color-white); padding:0;"><div class="table-responsive" style="margin:0; border:none; box-shadow:none; border-radius:0;"><table class="data-table"><thead><tr><th>월</th><th>납품액</th><th>발주액</th><th>순손익</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
             });
             profitContent.innerHTML = html;
         }
@@ -653,6 +659,7 @@ const firebaseConfig = {
             monthSummaryContent.innerHTML = `<div class="profit-grid"><div class="profit-card"><span>납품 (수익)</span><strong>${mD.toLocaleString()}원</strong></div><div class="profit-card"><span>발주 (비용)</span><strong>${mO.toLocaleString()}원</strong></div><div class="profit-card full"><span>해당 월 순손익</span><strong class="${mP>=0?'text-profit':'text-loss'}">${mP.toLocaleString()}원</strong></div></div><div class="table-responsive"><table class="data-table"><thead><tr><th>일자</th><th>구분</th><th>품목</th><th>수량</th><th>금액(원)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
         }
 
+        // --- 폼 로직 (후카박스 소형/대형 분리 적용) ---
         function getFranchisePrices() { return JSON.parse(localStorage.getItem('hesedFranchisePrices')) || {}; }
         function getPartners() {
             if (currentType === 'delivery') { let p = JSON.parse(localStorage.getItem('hesedBranchesV2')); if(!p) { p = defaultBranchesV2; localStorage.setItem('hesedBranchesV2', JSON.stringify(p)); } return p; } 
@@ -666,21 +673,46 @@ const firebaseConfig = {
         }
         partnerSelect.addEventListener('change', calculateTotal);
         function updateItemOptions() { itemSelect.innerHTML = Object.keys(inventoryData[currentCat]).map(i => `<option value="${i}">${i}</option>`).join(''); renderSizeGrid(); }
+        
         function renderSizeGrid() {
             const item = itemSelect.value; if (!item) return;
             sizeGrid.innerHTML = inventoryData[currentCat][item].map(s => `<div class="size-item"><span>${s}</span><input type="number" class="size-input" data-size="${s}" min="0" placeholder="0"></div>`).join('');
             document.querySelectorAll('.size-input').forEach(i => i.addEventListener('input', calculateTotal)); calculateTotal(); checkLearnedPrice();
         }
+        
         function calculateTotal() {
-            currentTotalQty = 0; document.querySelectorAll('.size-input').forEach(i => currentTotalQty += parseInt(i.value) || 0); totalQtyDisplay.innerText = currentTotalQty;
+            currentTotalQty = 0; let totalDelivPrice = 0;
             const cost = parseInt(costInput.value) || 0;
+            const item = itemSelect.value;
+            const fp = getFranchisePrices();
+            const sel = partnerSelect.options[partnerSelect.selectedIndex];
+            const isDirect = sel ? sel.dataset.type === 'direct' : false;
+
+            document.querySelectorAll('.size-input').forEach(input => {
+                const q = parseInt(input.value) || 0;
+                currentTotalQty += q;
+                if (currentType === 'delivery' && q > 0 && cost > 0) {
+                    if (isDirect) {
+                        totalDelivPrice += cost * q;
+                    } else {
+                        let cPrice;
+                        if (item === '후카박스') cPrice = fp[`후카박스_${input.dataset.size}`] ? parseInt(fp[`후카박스_${input.dataset.size}`]) : (cost * 2);
+                        else cPrice = fp[item] ? parseInt(fp[item]) : (cost * 2);
+                        totalDelivPrice += cPrice * q;
+                    }
+                }
+            });
+            totalQtyDisplay.innerText = currentTotalQty;
+
             if (currentType === 'delivery' && currentTotalQty > 0 && cost > 0) {
-                const sel = partnerSelect.options[partnerSelect.selectedIndex]; const isDirect = sel ? sel.dataset.type === 'direct' : false;
-                if (isDirect) { deliveryPriceLabel.innerText = '청구액 (직영 원가)'; deliveryPriceInput.value = (cost * currentTotalQty).toLocaleString() + ' 원'; } 
-                else { const cPrice = getFranchisePrices()[itemSelect.value] ? parseInt(getFranchisePrices()[itemSelect.value]) : (cost * 2); deliveryPriceLabel.innerText = `청구액 (가맹 단가 ${cPrice.toLocaleString()})`; deliveryPriceInput.value = (cPrice * currentTotalQty).toLocaleString() + ' 원'; }
+                deliveryPriceLabel.innerText = isDirect ? '총 청구액 (직영 원가)' : '총 청구액 (가맹 단가)';
+                deliveryPriceInput.value = totalDelivPrice.toLocaleString() + ' 원';
             } else { deliveryPriceInput.value = ''; deliveryPriceLabel.innerText = '총 납품 청구액'; }
-            const tAmt = parseInt(totalOrderAmount.value) || 0; calcUnitPrice.value = (currentType === 'order' && currentTotalQty > 0 && tAmt > 0) ? Math.round(tAmt / currentTotalQty).toLocaleString() + ' 원' : '';
+            
+            const tAmt = parseInt(totalOrderAmount.value) || 0;
+            calcUnitPrice.value = (currentType === 'order' && currentTotalQty > 0 && tAmt > 0) ? Math.round(tAmt / currentTotalQty).toLocaleString() + ' 원' : '';
         }
+        
         costInput.addEventListener('input', calculateTotal); totalOrderAmount.addEventListener('input', calculateTotal);
         function toggleMode() {
             renderPartnerSelect();
@@ -703,16 +735,26 @@ const firebaseConfig = {
             e.preventDefault(); if (currentTotalQty <= 0) return alert("수량을 입력하세요.");
             const sizesData = []; document.querySelectorAll('.size-input').forEach(i => { const q = parseInt(i.value); if (q > 0) sizesData.push({ size: i.dataset.size, qty: q }); });
             const record = { category: currentCat === 'uniform' ? '유니폼' : '물품', type: currentType, item: itemSelect.value, partner: partnerSelect.value, sizes: sizesData, totalQty: currentTotalQty, date: dateInput.value, author: auth.currentUser.email, timestamp: Date.now() };
+            
             if (currentType === 'delivery') {
                 const sel = partnerSelect.options[partnerSelect.selectedIndex]; record.isDirect = sel ? sel.dataset.type === 'direct' : false; record.cost = costInput.value;
-                record.deliveryUnitPrice = record.isDirect ? costInput.value : (getFranchisePrices()[record.item] || (costInput.value * 2));
-                record.totalDeliveryPrice = record.deliveryUnitPrice * currentTotalQty;
+                let totPrice = 0; const fp = getFranchisePrices();
+                record.sizes.forEach(s => {
+                    if (record.isDirect) totPrice += costInput.value * s.qty;
+                    else {
+                        let cP = (record.item === '후카박스') ? (fp[`후카박스_${s.size}`] || (costInput.value * 2)) : (fp[record.item] || (costInput.value * 2));
+                        totPrice += cP * s.qty;
+                    }
+                });
+                record.deliveryUnitPrice = record.isDirect ? costInput.value : "개별단가"; // 디스플레이용
+                record.totalDeliveryPrice = totPrice;
             } else { record.vat = vatCheck.checked ? '부가세 포함' : '별도'; record.totalAmount = totalOrderAmount.value; record.unitPrice = Math.round(record.totalAmount / currentTotalQty); }
+            
             try { await addDoc(collection(db, "katsu_inventory"), record); document.querySelectorAll('.size-input').forEach(i => i.value = ''); costInput.value = ''; deliveryPriceInput.value = ''; totalOrderAmount.value = ''; calcUnitPrice.value = ''; totalQtyDisplay.innerText = '0'; currentTotalQty = 0; alert("저장 완료"); } 
             catch(e) { alert("저장 오류"); }
         });
 
-        // 모달 관리
+        // 모달 관리 (후카박스 소형/대형 분리 렌더링)
         window.closeModal = function(id) { document.getElementById(id).style.display = 'none'; }
         document.getElementById('btnManagePartner').addEventListener('click', () => { document.getElementById('partnerModalTitle').innerText = currentType === 'delivery' ? '납품처 관리' : '발주처 관리'; document.getElementById('newBranchType').style.display = currentType === 'delivery' ? 'block' : 'none'; renderModalList(); document.getElementById('partnerModal').style.display = 'flex'; });
         function renderModalList() {
@@ -735,11 +777,30 @@ const firebaseConfig = {
         });
         document.getElementById('btnSettingsModal').addEventListener('click', () => {
             const fp = getFranchisePrices(); let html = '';
-            for(let cat in inventoryData) for(let item in inventoryData[cat]) html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="기본 2배수"></div>`;
+            for(let cat in inventoryData) {
+                for(let item in inventoryData[cat]) {
+                    if (item === '후카박스') {
+                        html += `<div class="setting-row"><span>${item} (소형)</span><input type="number" id="price_후카박스_소형" class="setting-input" value="${fp['후카박스_소형']||''}" placeholder="기본 2배수"></div>`;
+                        html += `<div class="setting-row"><span>${item} (대형)</span><input type="number" id="price_후카박스_대형" class="setting-input" value="${fp['후카박스_대형']||''}" placeholder="기본 2배수"></div>`;
+                    } else {
+                        html += `<div class="setting-row"><span>${item}</span><input type="number" id="price_${item}" class="setting-input" value="${fp[item]||''}" placeholder="기본 2배수"></div>`;
+                    }
+                }
+            }
             document.getElementById('franchisePriceInputs').innerHTML = html; document.getElementById('settingsModal').style.display = 'flex';
         });
         window.saveFranchisePrices = function() {
-            const fp = {}; for(let cat in inventoryData) for(let item in inventoryData[cat]) { const val = document.getElementById(`price_${item}`).value; if(val) fp[item] = val; }
+            const fp = {}; 
+            for(let cat in inventoryData) {
+                for(let item in inventoryData[cat]) {
+                    if(item === '후카박스') {
+                        const v1 = document.getElementById(`price_후카박스_소형`).value; if(v1) fp['후카박스_소형'] = v1;
+                        const v2 = document.getElementById(`price_후카박스_대형`).value; if(v2) fp['후카박스_대형'] = v2;
+                    } else {
+                        const v = document.getElementById(`price_${item}`).value; if(v) fp[item] = v; 
+                    }
+                }
+            }
             localStorage.setItem('hesedFranchisePrices', JSON.stringify(fp)); alert('저장되었습니다.'); calculateTotal(); 
         };
         document.getElementById('darkModeToggle').addEventListener('change', (e) => {
@@ -747,7 +808,7 @@ const firebaseConfig = {
             else { document.body.classList.remove('dark-mode'); localStorage.setItem('hesedDarkMode', 'false'); }
         });
 
-        // --- ★ PDF 추출 핵심 로직 ---
+        // --- ★ PDF 추출 로직 (완벽 분리 반영) ---
         function updatePDFMonthSelect() {
             const mSet = new Set(); allRecords.forEach(r => { if(r.date) mSet.add(r.date.substring(0,7)); });
             document.getElementById('pdfMonthSelect').innerHTML = Array.from(mSet).sort().reverse().map(m => `<option value="${m}">${m}</option>`).join('');
@@ -767,23 +828,21 @@ const firebaseConfig = {
                     if (r.type === 'order' && r.unitPrice) { if (!monthPrices[r.item].cost) monthPrices[r.item].cost = r.unitPrice; }
                     if (r.type === 'delivery') {
                         if (r.cost) monthPrices[r.item].cost = r.cost;
-                        if (r.isDirect) monthPrices[r.item].direct = r.deliveryUnitPrice;
-                        else monthPrices[r.item].franchise = r.deliveryUnitPrice;
+                        if (r.isDirect) monthPrices[r.item].direct = r.cost; // 직영은 원가 그대로
                     }
                 }
             });
 
             let html = `<div style="padding: 20px; font-family: 'Pretendard', sans-serif;">`;
-            html += `<h2 style="text-align:center; margin-bottom:24px; font-size: 24px; font-weight: 800;">${ym} 카츠헤세드 납품 내역서</h2>`;
+            html += `<h2 style="text-align:center; margin-bottom:24px; font-size: 20px; font-weight: 800;">${ym} 카츠헤세드 납품 내역서</h2>`;
             
-            // 상단: 단가표 요약
-            html += `<h3 style="font-size: 15px; margin-bottom: 10px;">📊 해당 월 품목별 단가표</h3>`;
-            html += `<div class="pdf-table-container"><table style="width:100%; border-collapse:collapse; text-align:center; font-size:12px; border-top: 2px solid #000; border-bottom: 2px solid #000; margin-bottom: 30px;">
+            html += `<h3 style="font-size: 14px; margin-bottom: 8px;">📊 품목별 단가표 (해당 월 기준)</h3>`;
+            html += `<div class="pdf-table-container"><table style="width:100%; border-collapse:collapse; text-align:center; font-size:11px; border-top: 2px solid #000; border-bottom: 2px solid #000; margin-bottom: 30px;">
                         <thead><tr style="background:#f8f9fa;">
-                                <th style="padding:10px; border-bottom:1px solid #aaa;">품목</th>
-                                <th style="padding:10px; border-bottom:1px solid #aaa;">1개당 원가</th>
-                                <th style="padding:10px; border-bottom:1px solid #aaa;">직영점 납품가</th>
-                                <th style="padding:10px; border-bottom:1px solid #aaa;">가맹점 납품가</th>
+                                <th style="padding:8px; border-bottom:1px solid #aaa;">품목</th>
+                                <th style="padding:8px; border-bottom:1px solid #aaa;">1개당 원가</th>
+                                <th style="padding:8px; border-bottom:1px solid #aaa;">직영점 납품가</th>
+                                <th style="padding:8px; border-bottom:1px solid #aaa;">가맹점 납품가</th>
                             </tr></thead><tbody>`;
             
             for(let cat in inventoryData) {
@@ -792,27 +851,31 @@ const firebaseConfig = {
                     const cost = mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-';
                     const direct = mp.direct ? Number(mp.direct).toLocaleString() + '원' : (mp.cost ? Number(mp.cost).toLocaleString() + '원' : '-');
                     let franchise = '-';
-                    if (mp.franchise) franchise = Number(mp.franchise).toLocaleString() + '원';
-                    else if (mp.cost) franchise = fpSettings[item] ? Number(fpSettings[item]).toLocaleString() + '원' : Number(mp.cost * 2).toLocaleString() + '원';
-                    else if (fpSettings[item]) franchise = Number(fpSettings[item]).toLocaleString() + '원 (설정가)';
-                    html += `<tr><td style="padding:8px; border-bottom:1px solid #eee; font-weight:bold;">${item}</td><td style="padding:8px; border-bottom:1px solid #eee;">${cost}</td><td style="padding:8px; border-bottom:1px solid #eee;">${direct}</td><td style="padding:8px; border-bottom:1px solid #eee; color:#d63031;">${franchise}</td></tr>`;
+                    if (item === '후카박스') {
+                        const fs = fpSettings['후카박스_소형'] ? Number(fpSettings['후카박스_소형']).toLocaleString()+'원' : (mp.cost ? Number(mp.cost*2).toLocaleString()+'원' : '-');
+                        const fl = fpSettings['후카박스_대형'] ? Number(fpSettings['후카박스_대형']).toLocaleString()+'원' : (mp.cost ? Number(mp.cost*2).toLocaleString()+'원' : '-');
+                        franchise = `소: ${fs} / 대: ${fl}`;
+                    } else {
+                        if (fpSettings[item]) franchise = Number(fpSettings[item]).toLocaleString() + '원 (설정가)';
+                        else if (mp.cost) franchise = Number(mp.cost * 2).toLocaleString() + '원';
+                    }
+                    html += `<tr><td style="padding:6px; border-bottom:1px solid #eee; font-weight:bold;">${item}</td><td style="padding:6px; border-bottom:1px solid #eee;">${cost}</td><td style="padding:6px; border-bottom:1px solid #eee;">${direct}</td><td style="padding:6px; border-bottom:1px solid #eee; color:#d63031;">${franchise}</td></tr>`;
                 }
             }
             html += `</tbody></table></div>`;
 
-            // 하단: 품목별 납품 테이블
             let grandTotal = 0;
             for(let cat in inventoryData) {
                 for(let item in inventoryData[cat]) {
                     const itemRecords = delivRecords.filter(r => r.item === item);
-                    html += `<div class="pdf-table-container"><h3 style="font-size: 15px; margin-bottom: 8px; margin-top: 10px; border-left: 4px solid #000; padding-left: 8px;">${item} 거래 내역</h3>`;
-                    html += `<table style="width:100%; border-collapse:collapse; text-align:center; font-size:12px; border-top: 2px solid #000; border-bottom: 2px solid #000; margin-bottom: 20px;">
+                    html += `<div class="pdf-table-container"><h3 style="font-size: 14px; margin-bottom: 6px; margin-top: 10px; border-left: 3px solid #000; padding-left: 6px;">${item} 거래 내역</h3>`;
+                    html += `<table style="width:100%; border-collapse:collapse; text-align:center; font-size:11px; border-top: 2px solid #000; border-bottom: 2px solid #000; margin-bottom: 20px;">
                         <thead><tr style="background:#f8f9fa;">
-                                <th style="padding:8px; border-bottom:1px solid #aaa; width:15%;">일자</th><th style="padding:8px; border-bottom:1px solid #aaa; width:20%;">납품처</th><th style="padding:8px; border-bottom:1px solid #aaa; width:10%;">구분</th><th style="padding:8px; border-bottom:1px solid #aaa; width:30%;">사이즈/수량</th><th style="padding:8px; border-bottom:1px solid #aaa; width:10%;">총수량</th><th style="padding:8px; border-bottom:1px solid #aaa; width:15%;">청구액</th>
+                                <th style="padding:6px; border-bottom:1px solid #aaa; width:15%;">일자</th><th style="padding:6px; border-bottom:1px solid #aaa; width:20%;">납품처</th><th style="padding:6px; border-bottom:1px solid #aaa; width:10%;">구분</th><th style="padding:6px; border-bottom:1px solid #aaa; width:30%;">사이즈/수량</th><th style="padding:6px; border-bottom:1px solid #aaa; width:10%;">총수량</th><th style="padding:6px; border-bottom:1px solid #aaa; width:15%;">청구액</th>
                             </tr></thead><tbody>`;
                     
                     if (itemRecords.length === 0) {
-                        html += `<tr><td colspan="6" style="padding:20px; color:#999;">거래 내역이 없습니다 (공란)</td></tr>`;
+                        html += `<tr><td colspan="6" style="padding:16px; color:#999;">거래 내역이 없습니다 (공란)</td></tr>`;
                     } else {
                         let itemTotalQty = 0; let itemTotalAmt = 0;
                         itemRecords.forEach(r => {
@@ -820,15 +883,15 @@ const firebaseConfig = {
                             const typeStr = r.isDirect ? '직영' : '가맹';
                             const amt = Number(r.totalDeliveryPrice || 0);
                             itemTotalQty += Number(r.totalQty || 0); itemTotalAmt += amt; grandTotal += amt;
-                            html += `<tr><td style="padding:8px; border-bottom:1px solid #eee;">${r.date}</td><td style="padding:8px; border-bottom:1px solid #eee; font-weight:bold;">${r.partner}</td><td style="padding:8px; border-bottom:1px solid #eee; color:${r.isDirect?'#000':'#d63031'};">${typeStr}</td><td style="padding:8px; border-bottom:1px solid #eee;">${sizes}</td><td style="padding:8px; border-bottom:1px solid #eee;">${r.totalQty}</td><td style="padding:8px; border-bottom:1px solid #eee;">${amt.toLocaleString()}원</td></tr>`;
+                            html += `<tr><td style="padding:6px; border-bottom:1px solid #eee;">${r.date}</td><td style="padding:6px; border-bottom:1px solid #eee; font-weight:bold;">${r.partner}</td><td style="padding:6px; border-bottom:1px solid #eee; color:${r.isDirect?'#000':'#d63031'};">${typeStr}</td><td style="padding:6px; border-bottom:1px solid #eee;">${sizes}</td><td style="padding:6px; border-bottom:1px solid #eee;">${r.totalQty}</td><td style="padding:6px; border-bottom:1px solid #eee;">${amt.toLocaleString()}원</td></tr>`;
                         });
-                        html += `<tr style="background:#fdfdfd;"><td colspan="4" style="padding:10px; font-weight:bold; text-align:right; border-top:1px solid #000;">[${item}] 소계</td><td style="padding:10px; font-weight:bold; border-top:1px solid #000;">${itemTotalQty}개</td><td style="padding:10px; font-weight:bold; border-top:1px solid #000; color:#d63031;">${itemTotalAmt.toLocaleString()}원</td></tr>`;
+                        html += `<tr style="background:#fdfdfd;"><td colspan="4" style="padding:8px; font-weight:bold; text-align:right; border-top:1px solid #000;">[${item}] 소계</td><td style="padding:8px; font-weight:bold; border-top:1px solid #000;">${itemTotalQty}개</td><td style="padding:8px; font-weight:bold; border-top:1px solid #000; color:#d63031;">${itemTotalAmt.toLocaleString()}원</td></tr>`;
                     }
                     html += `</tbody></table></div>`;
                 }
             }
 
-            html += `<div style="text-align:right; margin-top:20px; font-size:20px; font-weight:900; border-top:3px double #000; padding-top:15px;">이 달 총 청구 합계: <span style="color:#d63031;">${grandTotal.toLocaleString()}원</span></div></div>`;
+            html += `<div style="text-align:right; margin-top:20px; font-size:18px; font-weight:900; border-top:3px double #000; padding-top:12px;">이 달 총 청구 합계: <span style="color:#d63031;">${grandTotal.toLocaleString()}원</span></div></div>`;
             document.getElementById('printArea').innerHTML = html;
             closeModal('settingsModal'); setTimeout(() => { window.print(); }, 200);
         };
@@ -847,7 +910,12 @@ const firebaseConfig = {
                 const isD = data.type === 'delivery'; const sizeTxt = data.sizes.map(s => `${s.size}(${s.qty})`).join(', ');
                 let pHTML = '';
                 if (isD) {
-                    pHTML = `<div class="rc-price-info">단가 ${Number(data.deliveryUnitPrice).toLocaleString()} <span style="font-size:0.7rem;">(${data.isDirect ? '직영 원가' : '가맹 납품가'})</span></div><div class="rc-total-price" style="color:var(--color-profit);">${Number(data.totalDeliveryPrice).toLocaleString()}원</div>`;
+                    let priceLabelText = data.isDirect ? '직영 원가' : '가맹 납품가';
+                    let uPriceText = '';
+                    if (!data.isDirect && data.item === '후카박스') uPriceText = '사이즈별 별도단가';
+                    else uPriceText = Number(data.deliveryUnitPrice || data.cost).toLocaleString() + '원';
+                    
+                    pHTML = `<div class="rc-price-info">단가 ${uPriceText} <span style="font-size:0.7rem;">(${priceLabelText})</span></div><div class="rc-total-price" style="color:var(--color-profit);">${Number(data.totalDeliveryPrice).toLocaleString()}원</div>`;
                 } else {
                     pHTML = `<div class="rc-price-info">단가 ${Number(data.unitPrice).toLocaleString()}</div><div class="rc-total-price">${Number(data.totalAmount).toLocaleString()}원 <span style="font-size:0.7rem; font-weight:normal;">${data.vat?'('+data.vat+')':''}</span></div>`;
                 }
